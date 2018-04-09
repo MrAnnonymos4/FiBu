@@ -1,16 +1,22 @@
 // JavaScript source code
 function newDiv(insertIntoDivId) {
-    let htmlString;
-    htmlString = '<aside class="aside" id="aside' + countAsides() + 1 + '" onclick="alert()" draggable=true></aside>';
-    document.getElementById(insertIntoDivId).innerHTML = htmlString;
+    let newDivId = "aside" + (countAsides() + 1);
+    let theElement = document.createElement("aside");
+    theElement.classList.add("aside");
+    theElement.id = newDivId;
+    theElement.draggable = true;
+    document.getElementById(insertIntoDivId).appendChild(theElement);
+    initialize(newDivId);
     
 }
 
 function countAsides() {
-    let asideCount = document.getElementsByTagName("aside").length;
+    let asideCount = document.getElementsByClassName("aside").length;
     console.log(asideCount);
     return asideCount
 }
 
 
 
+//onclick="initialize("' + newDivId + '")"
+//updateLastClickedAsideId("' + newDivId + '")
