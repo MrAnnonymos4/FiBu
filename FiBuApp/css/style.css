@@ -3,7 +3,8 @@
 }
 
 #nav{
-    text-color: white;
+    color: white;
+    background-color: black;
 }
 
 #activeSide{
@@ -39,8 +40,9 @@
 #input button{
     width: 100px;
 }
-#input table td th{
-    height: 51px;
+#input input{
+    width: 150px;
+    margin: 2px;
 }
 
 .tableDif {
