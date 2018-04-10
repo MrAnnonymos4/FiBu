@@ -1,33 +1,21 @@
 // JavaScript source code
-function newAside(insertIntoDivId) {
-    let insertIntoDiv = document.getElementById(insertIntoDivId);
-    let newDivId = "aside" + (countAsides() + 1);
-    let theElement = document.createElement("aside");
-    theElement.classList.add("aside");
-    theElement.id = newDivId;
-    theElement.draggable = true;
-    //theElement.style.offsetTop = insertIntoDiv.offsetTop;
-    document.getElementById(insertIntoDivId).appendChild(theElement);
-    initialize(newDivId);
-    return theElement
-    console.log(theElement);
-}
+//function newAside(insertIntoDivId) {
+//    let insertIntoDiv = document.getElementById(insertIntoDivId);
+//    let newDivId = "aside" + (countAsides() + 1);
+//    let theElement = document.createElement("aside");
+//    theElement.classList.add("aside");
+//    theElement.id = newDivId;
+//    theElement.draggable = true;
+//    //theElement.style.offsetTop = insertIntoDiv.offsetTop;
+//    document.getElementById(insertIntoDivId).appendChild(theElement);
+//    initialize(newDivId);
+//    return theElement
+//    console.log(theElement);
+//}
 
 /*
  * Creates a new T-Account into a new Aside
  */
-function createNewTAccount(insertIntoDiv) {
-    let theAside = newAside(insertIntoDiv);
-    let theTable = new StaticList();
-    theTable.addRow([1, "test"]);
-    theAside.innerHTML = theTable.getHtml();
-}
-
-function countAsides() {
-    let asideCount = document.getElementsByClassName("aside").length;
-    console.log(asideCount);
-    return asideCount
-}
 
 
 function newGridsterElement(theGridsterId) {
@@ -43,10 +31,16 @@ function newGridsterElement(theGridsterId) {
     theGridster.add_widget(theElement);
 }
  
+function createNewTAccount(insertIntoDiv) {
 
+    let theTable = new StaticList();
+    theTable.addRow([1, "test"]);
+
+}
 function countGridsterLiElements(theGridsterId) {
     return document.getElementById(theGridsterId).childNodes[1].children.length;
 }
+
 
 //onclick="initialize("' + newDivId + '")"
 //updateLastClickedAsideId("' + newDivId + '")
