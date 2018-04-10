@@ -53,9 +53,54 @@
             </div>
             <!-- /.container -->
         </nav>
-    
-    <h1>Hello, world!</h1>
-    <button type="button" class="btn btn-success">Success</button>
+
+        <div id="body">
+
+            <h1>Hello World!</h1>
+                
+        </div>
+
+        <div id="input">           
+                <table border="0" cellspacing="12" width="50%">
+                            <td style="width:50%;">
+                                <table class="table" width="100%" border="0" cellpadding="10" cellspacing="10">
+                                    <tbody>
+                                        <tr style="height: 60px;">
+                                            <td scope="col">Nr.</td>
+                                            <td scope="col">Sollbuchung</td>
+                                            <td scope="col">Betrag</td>
+                                            <td scope="col">Habenbuchung</td>
+                                            <td scope="col">Betrag</td>
+                                        </tr>
+                                        <tr style="height: 60px;">
+                                            <td scope="row">1</td>
+                                            <td><input type="text" id="sollName"></input></td>
+                                            <td><input type="number" id="sollNumber"></input></td>
+                                            <td><input type="text" id="habenName"></input></td>
+                                            <td><input type="number" id="habenNumber"></input></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td style="width:25%; height: 100px;">
+                                <table class="table" width="50%" border="0" cellpadding="10" cellspacing="10">
+                                    <tbody>
+                                        <tr style="height: 60px;">
+                                            <td><button type="button" class="btn btn-default">Neu</button></td>
+                                            <td><button type="button" class="btn btn-default">Abschluss</button></td>
+                                            <td><button type="button" class="btn btn-default">Protokoll</button></td>
+                                        </tr>
+                                        <tr style="height: 60px;">
+                                            <td><button type="button" class="btn btn-default">Buchen</button></th>
+                                            <td><button type="button" class="btn btn-default">Split</button></td>
+                                            <td><button type="button" class="btn btn-default">Journal</button></td>                      
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        
+                    </table>
+        </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
