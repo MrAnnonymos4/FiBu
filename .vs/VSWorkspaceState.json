@@ -3,8 +3,9 @@
     "",
     "\\FiBuApp",
     "\\FiBuApp\\CSS",
-    "\\FiBuApp\\HTML"
+    "\\FiBuApp\\jquery",
+    "\\FiBuApp\\js"
   ],
-  "SelectedNode": "\\FiBuApp\\HTML\\dragAndDrop.js",
+  "SelectedNode": "\\FiBuApp\\js\\Fibu.js",
   "PreviewInSolutionExplorer": false
 }
