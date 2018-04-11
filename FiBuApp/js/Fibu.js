@@ -42,5 +42,44 @@ function countGridsterLiElements(theGridsterId) {
 }
 
 
-//onclick="initialize("' + newDivId + '")"
-//updateLastClickedAsideId("' + newDivId + '")
+
+
+
+
+<li data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+    <div class="widgetLabel">Name</div>
+    <div class="limiter">
+        <div class="wrap-table100">
+            <div class="table">
+                <div class="row header">
+                    <div class="cell" data-title="sollCount">
+                        #
+                                        </div>
+                    <div class="cell" data-title="sollEntries">
+                        Soll
+                                        </div>
+                    <div class="cell" data-title="habenCount">
+                        #
+                                        </div>
+                    <div class="cell" data-title="habenEntries">
+                        Haben
+                                        </div>
+                </div>
+
+                <div class="row">
+                    <div class="cell" data-title="sollCount">
+                        1
+                                        </div>
+                    <div class="cell" data-title="sollEntries">
+                        500
+                                        </div>
+                    <div class="cell" data-title="habenCount">
+
+                    </div>
+                    <div class="cell" data-title="habenEntries">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</li>

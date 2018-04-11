@@ -1,23 +1,35 @@
 ﻿body
 {
+
 }
 
-#nav{
+#nav {
     color: white;
     background-color: black;
 }
 
-#activeSide{
-    background:black;
+#fibuApplication{
+    height:90vh;
 }
 
-#passiveSide{
-    background:grey;
+#activeSide {
+    background: black;
+    width: 50%;
+    height: 70%;
+    float: left;
+    height: 70%;
 }
 
-#footer{
-    position:fixed;
-    bottom:1px;
+#passiveSide {
+    background: grey;
+    width: 50%;
+    height: 70%;
+    float: right;
+}
+
+#footer {
+    position: fixed;
+    bottom: 1px;
 }
 
 #header{
@@ -31,10 +43,14 @@
     background:black;
 }
 
-#input{
+#userInput{
     display: flex;
     justify-content: space-around;
-    vertical-align: top;
+    vertical-align: bottom;
+    width:100%;
+    position:fixed;
+    bottom:0;
+
 }
 
 #input button{
