@@ -2,7 +2,7 @@ $(function () { //DOM Ready
 
     $(".gridster ul").gridster({
         widget_margins: [10, 10],
-        widget_base_dimensions: [100, 100]
+        widget_base_dimensions: [450, 450]
     });
 
 });
@@ -10,7 +10,7 @@ $(function () { //DOM Ready
 function registerNewGrids() {
     $(".gridster ul").gridster({
         widget_margins: [10, 10],
-        widget_base_dimensions: [100, 100]
+        widget_base_dimensions: [300, 300]
     });
     console.log("registered new Grids");
 }
