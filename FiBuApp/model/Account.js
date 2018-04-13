@@ -3,6 +3,9 @@ class Account {
         this.Account = "test";
         this.accountName = accountName;
         this.accountWidget = "test";
+        this.accountTable = new Table();
+
+        
         registeredAccounts.push(this);
     }
 
@@ -26,11 +29,18 @@ class Account {
             sollEntries: anEntry.sollSum(),
             habenCount: 0,
             habenEntries: 0
-    }]
+        }]
+        this.accountTable.appendData(theNewData);
     }
 
     addHaben(anEntry) {
-
+        let theNewData = [{
+            sollCount: "",
+            sollEntries: "",
+            habenCount: 1,
+            habenEntries: anEntry.habenSum()
+        }]
+        this.accountTable.appendData(theNewData);
     }
 
     calculateSum(){

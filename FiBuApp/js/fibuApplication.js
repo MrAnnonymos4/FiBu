@@ -28,7 +28,7 @@ function buchenButtonClicked() {
     let habenName = $("#habenName").val();;
     let habenSum = $("#habenSum").val();;
     let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
-    theEntry.post();
+    //theEntry.post();
 }
 
 
