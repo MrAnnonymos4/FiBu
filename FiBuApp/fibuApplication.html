@@ -16,10 +16,15 @@
     <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
     <script src="jquery/jquery-3.2.1.min.js"></script>
-    <script src="js/fibu.js"></script>
+    <script src="js/fibuApplication.js"></script>
     <!-- <script src="js/dragAndDrop.js"></script> -->
     <script src="js/list.js"></script>
     <script src="js/grid.js"></script>
+    <script src="model/Entry.js"></script>
+    <script src="model/Account.js"></script>
+    <script src="model/History.js"></script>
+    <script src="model/Grid.js"></script>
+    <script src="model/Table.js"></script>
 
 
 
@@ -128,9 +133,9 @@
                                 <tr style="height: 60px;">
                                     <td scope="row">1</td>
                                     <td><input type="text" id="sollName"></td>
-                                    <td><input type="number" id="sollNumber"></td>
+                                    <td><input type="number" id="sollSum"></td>
                                     <td><input type="text" id="habenName"></td>
-                                    <td><input type="number" id="habenNumber"></td>
+                                    <td><input type="number" id="habenSum"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -144,7 +149,7 @@
                                     <td><button type="button" class="btn btn-default">Protokoll</button></td>
                                 </tr>
                                 <tr style="height: 60px;">
-                                    <td><button type="button" class="btn btn-default">Buchen</button></td>
+                                    <td><button type="button" class="btn btn-default" onclick="buchenButtonClicked()">Buchen</button></td>
                                     <td><button type="button" class="btn btn-default" id="splitButton">Split</button></td>
                                     <td><button type="button" class="btn btn-default">Journal</button></td>
                                 </tr>
