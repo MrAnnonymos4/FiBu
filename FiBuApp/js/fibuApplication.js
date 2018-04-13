@@ -21,6 +21,7 @@
 //console.log(theHistory);
 
 let registeredAccounts = [];
+let inputNumber = 2;
 
 function buchenButtonClicked() {
     let sollName = $("#sollName").val();
@@ -31,5 +32,25 @@ function buchenButtonClicked() {
     //theEntry.post();
 }
 
+function splitButtonClicked(){
+
+    let table = document.getElementById("inputMask");
+
+    let row = table.insertRow(inputNumber);
+
+    let numberCell = row.insertCell(0);
+    let sollCell = row.insertCell(1);
+    let sollSumCell = row.insertCell(2);
+    let habenCell = row.insertCell(3);
+    let habenSumCell = row.insertCell(4);
+
+    numberCell.innerHTML = inputNumber;
+    sollCell.innerHTML= inputNumber;
+    sollSumCell.innerHTML = inputNumber;
+    habenCell.innerHTML = inputNumber;
+    habenSumCell.innerHTML = inputNumber;
+
+    inputNumber++;
 
 
+}
