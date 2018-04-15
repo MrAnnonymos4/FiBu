@@ -44,21 +44,28 @@
 }
 
 #userInput{
-    display: flex;
-    justify-content: space-around;
-    vertical-align: bottom;
-    width:100%;
+    width: 100%;
     position:fixed;
     bottom:0;
-
 }
 
-#input button{
-    width: 100px;
+#userInput button{
+    width: 100%;
 }
-#input input{
-    width: 150px;
-    margin: 2px;
+
+#userInput input{
+    width: 100%;
+}
+
+#userInput table{
+    margin: 0 auto;
+    width: 35%;
+}
+
+#journal{
+    width: 20%;
+    position: fixed;
+    bottom: 0;
 }
 
 .tableDif {
