@@ -1,8 +1,11 @@
 class Table {
     constructor(tableName, widgetId) {
         this.tableName = tableName;
-        this.theWidget = "test";
+        this.theWidgetId = widgetId;
+        this.theWidget = $("#" + this.widgetId);
         this.theTable;
+
+       
 
         this.columns = [
             {
@@ -21,8 +24,11 @@ class Table {
                 field: "habenEntries",
                 title: "#"
             }
-        ]        
-        this.theTable = document.getElementById(widgetId).bootstrapTable(this.columns);
+        ]
+        let theTableHtmlElement = document.createElement("table");
+        theTableHtmlElement.setAttribute("id", this.tableName);
+        theTableHtmlElement.appendChild(bootstrapTable(this.columns));
+        this.theTable = document.getElementById(this.theWidgetId).appendChild(theTableHtmlElement);
     }
 
 

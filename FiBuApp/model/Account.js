@@ -2,8 +2,9 @@ class Account {
     constructor(accountName) {
         this.Account = "test";
         this.accountName = accountName;
-        this.accountWidget = "test";
-        this.accountTable = new Table();
+        this.gridster = thePassiveSideGridster;
+        this.accountWidget = thePassiveSideGridster.createNewWidget(this.accountName);
+        this.accountTable = new Table(this.accountName, this.accountName);
 
         
         registeredAccounts.push(this);

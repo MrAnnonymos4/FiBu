@@ -1,0 +1,10 @@
+Waren
+Warenbestand
+Bestand an Waren
+WB
+Warenaufwand
+Wareneingang
+Wareneinkauf
+WA
+Warenverkauf
+Erlöse

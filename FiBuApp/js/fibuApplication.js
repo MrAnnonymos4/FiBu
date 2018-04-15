@@ -21,8 +21,22 @@
 //console.log(theHistory);
 
 let registeredAccounts = [];
+let thePassiveSideGridster;
+
+
+
+function initialize() {
+    thePassiveSideGridster = new Grid("passiveSide", "passiveSideGridster2");
+}
 
 function buchenButtonClicked() {
+
+    if (document.getElementById("passiveSideGridster2") == null) {
+        initialize();
+    } else {
+        thePassiveSideGridster = document.getElementById("passiveSideGridster");
+    }
+
     let sollName = $("#sollName").val();
     let sollSum= $("#sollSum").val();;
     let habenName = $("#habenName").val();;

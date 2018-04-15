@@ -7,12 +7,18 @@ class Entry {
         this.habenSum = habenSum;
     }
 
+    /*
+    * Post the Entry to account.
+    * If there is no corresponding account, create a new one and add entry afterwards.
+    */
     post() {
+        
         let sollAccount = registeredAccounts.find(account => account.accountName === sollName);
         if (sollAccount == !null) {
             sollAccount.addEntry(true, this.id, this.sollSum);
         } else {
-            throw "Cannot add Entry to not existing account"
+            let theNewAccount = new Account(sollName);
+            theNewAccount.addEntry(false, this.id, this.sollName);
         }
 
 
@@ -20,8 +26,11 @@ class Entry {
         if (sollAccount == !null) {
             habenAccount.addEntry(false, this.id, this.habenSum);
         } else {
-            throw "Cannot add Entry to not existing account"
+            let theNewAccount = new Account(habenName);
+            theNewAccount.addEntry(false, this.id, this.habenSum);
         }
+
+
         
     }
 }

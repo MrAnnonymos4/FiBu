@@ -12,6 +12,7 @@ class Grid {
         let theUlHtmlElement = document.createElement("ul");
         theGridsterHtmlElement.appendChild(theUlHtmlElement);
         document.getElementById(theParentDivId).appendChild(theGridsterHtmlElement);
+        console.log("New grid created");
     }
 
     createNewWidget(theNewWidgetId) {
@@ -20,11 +21,14 @@ class Grid {
         let theGridsterData = $("#" + this.theGridsterId + " ul").gridster().data('gridster');
         let theNewWidget = document.createElement("li");
 
+        theNewWidget.setAttribute("id", theNewWidgetId)
         theNewWidget.classList.add("yellow");
         theNewWidget.setAttribute("data-col", 1);
         theNewWidget.setAttribute("data-row", this.widgetCounter);
         theNewWidget.setAttribute("data-sizex", 1);
         theNewWidget.setAttribute("data-sizey", 1);
+
+
 
         theGridsterData.add_widget(theNewWidget);
         
