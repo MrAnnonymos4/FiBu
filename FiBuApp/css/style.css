@@ -59,7 +59,13 @@
 
 #userInput table{
     margin: 0 auto;
-    width: 50%;
+    width: 35%;
+}
+
+#journal{
+    width: 20%;
+    position: fixed;
+    bottom: 0;
 }
 
 .tableDif {
