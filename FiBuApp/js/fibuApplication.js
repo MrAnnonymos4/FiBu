@@ -1,33 +1,35 @@
 
 let registeredAccounts = [];
-
 let thePassiveSideGridster;
+let inputNumber = 2;
+let journalNumber = 0;
 
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DomcontentLoaded");
+    initialize();
+});
 
 
 function initialize() {
     thePassiveSideGridster = new Grid("passiveSide", "passiveSideGridster2");
 }
 
-let inputNumber = 2;
-let journalNumber = 0;
-
-
 
 function buchenButtonClicked() {
-
+    
     if (document.getElementById("passiveSideGridster2") == null) {
         initialize();
     } else {
         thePassiveSideGridster = document.getElementById("passiveSideGridster");
     }
+    
 
     let sollName = $("#sollName").val();
-    let sollSum= $("#sollSum").val();;
-    let habenName = $("#habenName").val();;
-    let habenSum = $("#habenSum").val();;
+    let sollSum= $("#sollSum").val();
+    let habenName = $("#habenName").val();
+    let habenSum = $("#habenSum").val();
     let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
-    //theEntry.post();
+    theEntry.post();
 }
 
 function splitButtonClicked(){
