@@ -18,14 +18,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-table.js"></script>
 
-    <script src="js/list.js"></script>
-    <script src="js/grid.js"></script>
-    <script src="model/Entry.js"></script>
-    <script src="model/Account.js"></script>
-    <script src="model/History.js"></script>
-    <script src="model/Grid.js"></script>
-    <script src="model/Table.js"></script>
-    <script src="js/fibuApplication.js"></script>
+   
 
 </head>
 <body>
@@ -37,8 +30,10 @@
         </table>
     </div>
 <script>
-    var $table = $('#table');
-    $(function () {
+    
+	//document.addEventListener("DOMContentLoaded", function () {});
+	var $table = $('#table');
+//$(function(){
         var data = [
             {
                 "id": 0,
@@ -71,8 +66,8 @@
                 "price": "$5"
             }
         ];
-        $table.bootstrapTable({data: data});
-    });
+        document.getElementById("table").bootstrapTable({data: data});
+    
 </script>
 </body>
 </html>

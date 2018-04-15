@@ -17,7 +17,7 @@ class Entry {
         if (sollAccount == !null) {
             sollAccount.addEntry(true, this.id, this.sollSum);
         } else {
-            let theNewAccount = new Account(sollName);
+            let theNewAccount = new Account(this.sollName);
             theNewAccount.addEntry(false, this.id, this.sollName);
         }
 
@@ -26,7 +26,7 @@ class Entry {
         if (sollAccount == !null) {
             habenAccount.addEntry(false, this.id, this.habenSum);
         } else {
-            let theNewAccount = new Account(habenName);
+            let theNewAccount = new Account(this.habenName);
             theNewAccount.addEntry(false, this.id, this.habenSum);
         }
 

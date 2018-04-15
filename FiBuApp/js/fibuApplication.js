@@ -11,17 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function initialize() {
-    thePassiveSideGridster = new Grid("passiveSide", "passiveSideGridster2");
+    thePassiveSideGridster = new Grid("passiveSide", "passiveSideGridster");
 }
 
 
 function buchenButtonClicked() {
     
-    if (document.getElementById("passiveSideGridster2") == null) {
-        initialize();
-    } else {
-        thePassiveSideGridster = document.getElementById("passiveSideGridster");
-    }
+
     
 
     let sollName = $("#sollName").val();
