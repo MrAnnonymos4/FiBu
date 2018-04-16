@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+        <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/small-business.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/table.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+
+    <script src="jquery/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.gridster.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-table.js"></script>
+
+   
+
+</head>
+<body>
+    <div>
+        <table id="table">
+           
+
+            
+        </table>
+    </div>
+<script>
+    
+	//document.addEventListener("DOMContentLoaded", function () {});
+	var $table = $('#table');
+//$(function(){
+        var data = [
+            {
+                "id": 0,
+                "name": "Item 0",
+                "price": "$0"
+            },
+            {
+                "id": 1,
+                "name": "Item 1",
+                "price": "$1"
+            },
+            {
+                "id": 2,
+                "name": "Item 2",
+                "price": "$2"
+            },
+            {
+                "id": 3,
+                "name": "Item 3",
+                "price": "$3"
+            },
+            {
+                "id": 4,
+                "name": "Item 4",
+                "price": "$4"
+            },
+            {
+                "id": 5,
+                "name": "Item 5",
+                "price": "$5"
+            }
+        ];
+        document.getElementById("table").bootstrapTable({data: data});
+    
+</script>
+</body>
+</html>

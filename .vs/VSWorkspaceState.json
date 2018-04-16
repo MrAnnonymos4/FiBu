@@ -4,8 +4,9 @@
     "\\FiBuApp",
     "\\FiBuApp\\CSS",
     "\\FiBuApp\\jquery",
-    "\\FiBuApp\\js"
+    "\\FiBuApp\\js",
+    "\\FiBuApp\\model"
   ],
-  "SelectedNode": "\\FiBuApp\\CSS\\style.css",
+  "SelectedNode": "\\FiBuApp\\js\\fibuApplication.js",
   "PreviewInSolutionExplorer": false
 }
