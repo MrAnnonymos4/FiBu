@@ -22,7 +22,8 @@
 
 let registeredAccounts = [];
 let inputNumber = 2;
-let journalNumber = 0;
+let journalNumber = 1;
+let flag = 0;
 
 
 function buchenButtonClicked() {
@@ -63,10 +64,24 @@ function journalButtonClicked(){
 
     let historyBook = theHistory.getHistory();
 
+
     let table = document.getElementById("journalTable");
 
-    if(journalNumber == 0){
-        let row = table.insertRow(journalNumber);
+
+    if(flag == 1){
+
+        for(let theIndex = 0; theIndex < historyBook.length + 1; theIndex++){
+
+            document.getElementById("journalTable").deleteRow(0);
+
+        }
+
+        journalNumber = 1;
+        flag = 0;
+
+    }else{
+
+        let row = table.insertRow(0);
 
         let numberCell = row.insertCell(0);
         let sollCell = row.insertCell(1);
@@ -80,27 +95,26 @@ function journalButtonClicked(){
         habenCell.innerHTML = "Habenkonto";
         habenSumCell.innerHTML = "Habenbetrag";
 
-        journalNumber++;
+        for(let i = 0; i < historyBook.length; i++){
 
-    }
+            let row = table.insertRow(journalNumber);
+    
+            let numberCell = row.insertCell(0);
+            let sollCell = row.insertCell(1);
+            let sollSumCell = row.insertCell(2);
+            let habenCell = row.insertCell(3);
+            let habenSumCell = row.insertCell(4);
+    
+            numberCell.innerHTML = historyBook[i][0];
+            sollCell.innerHTML= historyBook[i][1];
+            sollSumCell.innerHTML = historyBook[i][2];
+            habenCell.innerHTML = historyBook[i][3];
+            habenSumCell.innerHTML = historyBook[i][4];
+    
+            journalNumber++;
+    
+        }
 
-    for(let i = 0; i < historyBook.length; i++){
-
-        let row = table.insertRow(journalNumber);
-
-        let numberCell = row.insertCell(0);
-        let sollCell = row.insertCell(1);
-        let sollSumCell = row.insertCell(2);
-        let habenCell = row.insertCell(3);
-        let habenSumCell = row.insertCell(4);
-
-        numberCell.innerHTML = historyBook[i][0];
-        sollCell.innerHTML= historyBook[i][1];
-        sollSumCell.innerHTML = historyBook[i][2];
-        habenCell.innerHTML = historyBook[i][3];
-        habenSumCell.innerHTML = historyBook[i][4];
-
-        journalNumber++;
-
+        flag = 1;
     }
 }
