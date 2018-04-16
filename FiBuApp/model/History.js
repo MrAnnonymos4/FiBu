@@ -1,11 +1,15 @@
 class History {
-    constructor(id) {
-        this.entryCount = 1;
-        this.id = id;
+    constructor(historyId) {
+        this.id = historyId;
+        this.historyEntries = [];
     }
 
     addEntryToHistory(anEntry) {
-        entryCount = entryCount + 1
+        this.historyEntries.push(anEntry);
+    }
+
+    getEntryCount() {
+        return this.historyEntries.length + 1;
     }
 
     getHistory(){
@@ -17,11 +21,6 @@ class History {
 
     return items;
     }
-
-    static countEntries() {
-        return entryCount;
-    }
-
 }
 
 

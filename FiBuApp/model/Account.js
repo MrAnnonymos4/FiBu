@@ -21,19 +21,19 @@ class Account {
 
     addSollEntry(anEntry) {
         let theNewSollData = [{
-            sollCount: "1",
+            sollCount: theHistory.getEntryCount(),
             sollEntries: anEntry.sollSum,
-            habenCount: "0",
-            habenEntries: "0"
+            habenCount: "",
+            habenEntries: ""
         }]
         this.accountTable.appendData(theNewSollData);
     }
 
     addHabenEntry(anEntry) {
         let theNewHabenData = [{
-            sollCount: "0",
-            sollEntries: "0",
-            habenCount: "1",
+            sollCount: "",
+            sollEntries: "",
+            habenCount: theHistory.getEntryCount(),
             habenEntries: anEntry.habenSum
         }];
         this.accountTable.appendData(theNewHabenData);
