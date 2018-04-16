@@ -1,66 +1,43 @@
 class Account {
     constructor(accountName) {
-        this.Account = "test";
         this.accountName = accountName;
-        this.gridster = thePassiveSideGridster;
-        this.accountWidget = thePassiveSideGridster.createNewWidget(this.accountName + "Widget");
-        this.accountTable = new Table(this.accountName, this.accountName + "Widget");
+        this.gridsterElement = theMainGridster;
+        this.accountWidget = this.gridsterElement.createNewWidget(this.accountName + "Widget");
+        this.accountTable = new Table(this.accountName + "Table", this.accountName + "Widget");
 
         
         registeredAccounts.push(this);
     }
 
-    getHtml() {
-
-    }
-
-    addEntry(isSoll, anEntry) {
-        if (isSoll) {
+    addEntry(anEntry, isActive) {
+        if (isActive) {
             this.addSoll(anEntry);
-        } else if (!isSoll) {
+        } else if (!isActive) {
             this.addHaben(anEntry);
         } else {
             throw "Illegal Entry";
         }
     }
 
-    addSoll(anEntry) {
-        let theNewData = [{
-            sollCount: 1,
+    addSollEntry(anEntry) {
+        let theNewSollData = [{
+            sollCount: "1",
             sollEntries: anEntry.sollSum,
-            habenCount: 0,
-            habenEntries: 0
+            habenCount: "0",
+            habenEntries: "0"
         }]
-        this.accountTable.appendData(theNewData);
+        this.accountTable.appendData(theNewSollData);
     }
 
-    addHaben(anEntry) {
-        let theNewData = [{
-            sollCount: "",
-            sollEntries: "",
-            habenCount: 1,
+    addHabenEntry(anEntry) {
+        let theNewHabenData = [{
+            sollCount: "0",
+            sollEntries: "0",
+            habenCount: "1",
             habenEntries: anEntry.habenSum
         }];
-        this.accountTable.appendData(theNewData);
+        this.accountTable.appendData(theNewHabenData);
     }
-
-    calculateSum(){
-
-    }
-
-
 }
-
-
-function getHtml() {
-
-}
-
-
-
-function calculateSum() {
-
-}
-
 
 

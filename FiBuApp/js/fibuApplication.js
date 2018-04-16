@@ -1,6 +1,6 @@
 
 let registeredAccounts = [];
-let thePassiveSideGridster;
+let theMainGridster;
 let inputNumber = 2;
 let journalNumber = 0;
 
@@ -11,14 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function initialize() {
-    thePassiveSideGridster = new Grid("passiveSide", "passiveSideGridster");
+    theMainGridster = new Grid("fibuApplication", "mainGridster");
 }
 
 
 function buchenButtonClicked() {
-    
-
-    
 
     let sollName = $("#sollName").val();
     let sollSum= $("#sollSum").val();

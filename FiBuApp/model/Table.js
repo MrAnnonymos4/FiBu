@@ -1,17 +1,18 @@
 class Table {
     constructor(tableName, widgetId) {
-        this.tableId = tableName + "Table";
-        this.theWidgetId = widgetId;
-        this.theWidget = $("#" + this.widgetId);
-        this.theTable;
+        this.tableName = tableName;
+        this.widgetId = widgetId;
+        this.widget = $("#" + this.widgetId);
+        this.table;
+
         this.columns = [
             {
                 field: "sollCount",
                 title: "#"
             },
             {
-                field: "Soll",
-                title: "sollEntries"
+                field: "sollEntries",
+                title: "Soll"
             },
             {
                 field: "habenCount",
@@ -19,31 +20,20 @@ class Table {
             },
             {
                 field: "habenEntries",
-                title: "#"
+                title: "Haben"
             }
         ]
 
-        
         let theTableHtmlElement = document.createElement("table");
-        theTableHtmlElement.setAttribute("id", this.tableId);
-        document.getElementById(this.theWidgetId).appendChild(theTableHtmlElement);
-        let $table = $('#' + this.tableId);
-        try {
-            $(function () { $table.bootstrapTable(this.columns); }); 
-            console.log("1");
-        } catch(err){
-            $(function () { $table.bootstrapTable(this.columns); }); 
-            console.log("2");
-        }
+        theTableHtmlElement.setAttribute("id", this.tableName);
+        document.getElementById(this.widgetId).appendChild(theTableHtmlElement);
 
-
-        
-
-        
+        this.table = $('#' + this.tableName);
+        this.table.bootstrapTable({ columns: this.columns });
     }
 
 
     appendData(theNewData) {
-        $(function () { $('#' + this.tableId).bootstrapTable('append', theNewData); }); 
+        this.table.bootstrapTable('append', theNewData);
     }
 }
