@@ -61,11 +61,9 @@ function journalButtonClicked(){
 
     let theHistory = new History;
 
-    let historyBook = theHistory.getHistory();
-
+    historyBook = theHistory.getHistory();
 
     let table = document.getElementById("journalTable");
-
 
     if(flag == 1){
 
@@ -78,23 +76,26 @@ function journalButtonClicked(){
         journalNumber = 1;
         flag = 0;
 
-    }else{
-
-        let row = table.insertRow(0);
-
-        let numberCell = row.insertCell(0);
-        let sollCell = row.insertCell(1);
-        let sollSumCell = row.insertCell(2);
-        let habenCell = row.insertCell(3);
-        let habenSumCell = row.insertCell(4);
-
-        numberCell.innerHTML = "Nr.:";
-        sollCell.innerHTML = "Sollkonto";
-        sollSumCell.innerHTML = "Sollbetrag";
-        habenCell.innerHTML = "Habenkonto";
-        habenSumCell.innerHTML = "Habenbetrag";
+    }else{ 
 
         for(let i = 0; i < historyBook.length; i++){
+
+            if(journalNumber == 1){
+
+                let row = table.insertRow(0);
+                
+                let numberCell = row.insertCell(0);
+                let sollCell = row.insertCell(1);
+                let sollSumCell = row.insertCell(2);
+                let habenCell = row.insertCell(3);
+                let habenSumCell = row.insertCell(4);
+
+                numberCell.innerHTML = "Nr.:";
+                sollCell.innerHTML = "Sollkonto";
+                sollSumCell.innerHTML = "Sollbetrag";
+                habenCell.innerHTML = "Habenkonto";
+                habenSumCell.innerHTML = "Habenbetrag";
+            }
 
             let row = table.insertRow(journalNumber);
     
