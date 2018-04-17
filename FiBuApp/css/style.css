@@ -63,9 +63,16 @@
 }
 
 #journal{
-    width: 20%;
+    width: 25%;
+    height: 200px;
     position: fixed;
     bottom: 0;
+}
+
+.scroll {
+    padding:15px;
+    overflow:auto;
+    height: 100%;
 }
 
 .tableDif {
