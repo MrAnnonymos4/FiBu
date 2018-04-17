@@ -21,6 +21,10 @@ class History {
 
     return items;
     }
+
+    getHtml() {
+        
+    }
 }
 
 

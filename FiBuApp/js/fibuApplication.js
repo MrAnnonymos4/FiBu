@@ -7,7 +7,6 @@ let journalNumber = 1;
 let flag = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DomcontentLoaded");
     initialize();
 });
 
@@ -19,7 +18,8 @@ function initialize() {
     $(".gridster ul").gridster({
         widget_base_dimensions: [300, 300],
         widget_margins: [5, 5],
-    });
+        resize: true
+    }).data('gridster');
 }
 
 

@@ -7,6 +7,7 @@ class Table {
 
         this.columns = [
             {
+                class: "cell",
                 field: "sollCount",
                 title: "#"
             },
@@ -15,10 +16,12 @@ class Table {
                 title: "Soll"
             },
             {
+                class: "cell",
                 field: "habenCount",
                 title: "#"
             },
             {
+                class: "cell",
                 field: "habenEntries",
                 title: "Haben"
             }
@@ -38,14 +41,15 @@ class Table {
 
     appendData(theNewData) {
         this.table.bootstrapTable('append', theNewData);
-        //this.resize();
+        this.resize();
     }
 
+    //Resize the widget according to new table size
     resize() {
-        let theNewTableWidth = document.getElementById(this.tableName).offsetWidth;
+        //let theNewTableWidth = document.getElementById(this.tableName).offsetWidth;
         let theNewTableHeight = document.getElementById(this.tableName).offsetHeight;
 
-        //theMainGridster.resize_widget(this.widget, theNewTableWidth, theNewTableHeight);
-        $("#" + theMainGridster.theGridsterId + " ul").gridster().data('gridster').resize_widget(this.widget, 300, 444);//theNewTableWidth, theNewTableHeight);
+        //this.widget[0].style.width = theNewTableWidth + "px";
+        this.widget[0].style.height = theNewTableHeight + 20 + "px"; // Adding height for css/style.css/.widgetLabel height
     }
 }

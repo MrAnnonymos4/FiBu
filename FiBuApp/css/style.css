@@ -109,6 +109,7 @@
 }
 
 .widgetLabel {
+    height:20px;
     font-family: Poppins-Regular;
     font-size: 16px;
     font-style:italic;
@@ -122,8 +123,5 @@
 }
 
 .gs_w {
-    background: yellow;
-}
-.yellow {
-    background:yellow;
+    
 }

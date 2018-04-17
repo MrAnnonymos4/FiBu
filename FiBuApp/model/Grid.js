@@ -22,7 +22,7 @@ class Grid {
         let theNewWidget = document.createElement("li");
 
         theNewWidget.setAttribute("id", theNewWidgetId)
-        theNewWidget.classList.add("yellow");
+        theNewWidget.classList.add("gs_w");
         theNewWidget.setAttribute("data-col", 1);
         theNewWidget.setAttribute("data-row", this.widgetCounter);
         theNewWidget.setAttribute("data-sizex", 1);
