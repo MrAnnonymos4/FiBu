@@ -35,6 +35,8 @@
 
 
 
+
+
 </head>
 <body>
 
@@ -75,112 +77,107 @@
     </nav>
 
     <!-- FibuApplication -->
-    <div id="fibuApplication">
-        <div id="activeSide">
-            <div class="gridster" id="activeSideGridster">
-                <ul>
-                    <li data-col="1" data-row="1" data-sizex="1" data-sizey="1">
-                        <div class="widgetLabel">Name</div>
-                        <div class="limiter">
-                            <div class="wrap-table100">
-                                <div class="table">
-                                    <div class="row header">
-                                        <div class="cell" data-title="sollCount">
-                                            #
-                                        </div>
-                                        <div class="cell" data-title="sollEntries">
-                                            Soll
-                                        </div>
-                                        <div class="cell" data-title="habenCount">
-                                            #
-                                        </div>
-                                        <div class="cell" data-title="habenEntries">
-                                            Haben
-                                        </div>
-                                    </div>
+    <div id="fibuApplication"></div>
 
-                                    <div class="row">
-                                        <div class="cell" data-title="sollCount">
-                                            1
-                                        </div>
-                                        <div class="cell" data-title="sollEntries">
-                                            500
-                                        </div>
-                                        <div class="cell" data-title="habenCount">
 
-                                        </div>
-                                        <div class="cell" data-title="habenEntries">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div id="passiveSide"></div>
-
-    </div>
-
-    <table id="table"></table>
+    <!-- Journal -->
     <div id="journal">
         <table class="table" id="journalTable">
+            <tr></tr>
+        </table>
+    </div>
+
+    <!-- Userinput -->
+    <div id="userInput">
+        <table>
             <tr>
+                <td>
+                    <table class="table" id="inputMask">
+                        <tbody>
+                            <tr style="height: 60px;">
+                                <td scope="col">Nr.</td>
+                                <td scope="col">Sollbuchung</td>
+                                <td scope="col">Betrag</td>
+                                <td scope="col">Habenbuchung</td>
+                                <td scope="col">Betrag</td>
+                            </tr>
+                            <tr style="height: 60px;">
+                                <td scope="row">1</td>
+                                <td><input type="text" id="sollName"></td>
+                                <td><input type="number" id="sollSum"></td>
+                                <td><input type="text" id="habenName"></td>
+                                <td><input type="number" id="habenSum"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table">
+                        <tbody>
+                            <tr style="height: 60px;">
+                                <td><button type="button" class="btn btn-default">Neu</button></td>
+                                <td><button type="button" class="btn btn-default">Abschluss</button></td>
+                                <td><button type="button" class="btn btn-default">Protokoll</button></td>
+                            </tr>
+                            <tr style="height: 60px;">
+                                <td><button type="button" class="btn btn-default" onclick="buchenButtonClicked()">Buchen</button></td>
+                                <td><button type="button" class="btn btn-default" onclick="splitButtonClicked()">Split</button></td>
+                                <td><button type="button" class="btn btn-default" onClick="journalButtonClicked()">Journal</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
             </tr>
         </table>
     </div>
-    <!-- Userinput -->
-    <div id="userInput">
-            <table>
-                <tr>
-                    <td>
-                        <table class="table" id="inputMask">
-                            <tbody>
-                                <tr style="height: 60px;">
-                                    <td scope="col">Nr.</td>
-                                    <td scope="col">Sollbuchung</td>
-                                    <td scope="col">Betrag</td>
-                                    <td scope="col">Habenbuchung</td>
-                                    <td scope="col">Betrag</td>
-                                </tr>
-                                <tr style="height: 60px;">
-                                    <td scope="row">1</td>
-                                    <td><input type="text" id="sollName"></td>
-                                    <td><input type="number" id="sollSum"></td>
-                                    <td><input type="text" id="habenName"></td>
-                                    <td><input type="number" id="habenSum"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td>
-                        <table class="table">
-                            <tbody>
-                                <tr style="height: 60px;">
-                                    <td><button type="button" class="btn btn-default">Neu</button></td>
-                                    <td><button type="button" class="btn btn-default">Abschluss</button></td>
-                                    <td><button type="button" class="btn btn-default">Protokoll</button></td>
-                                </tr>
-                                <tr style="height: 60px;">
-                                    <td><button type="button" class="btn btn-default" onclick="buchenButtonClicked()">Buchen</button></td>
-                                    <td><button type="button" class="btn btn-default" onclick="splitButtonClicked()">Split</button></td>
-                                    <td><button type="button" class="btn btn-default" onClick="journalButtonClicked()">Journal</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-    </div>
-    
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery.gridster.min.js"></script>
 
-   
-    <script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
+<!--<div id="activeSide">
+          <div class="gridster" id="activeSideGridster">
+              <ul>
+                  <li data-col="1" data-row="1" data-sizex="1" data-sizey="1">
+                      <div class="widgetLabel">Name</div>
+                      <div class="limiter">
+                          <div class="wrap-table100">
+                              <div class="table">
+                                  <div class="row header">
+                                      <div class="cell" data-title="sollCount">
+                                          #
+                                      </div>
+                                      <div class="cell" data-title="sollEntries">
+                                          Soll
+                                      </div>
+                                      <div class="cell" data-title="habenCount">
+                                          #
+                                      </div>
+                                      <div class="cell" data-title="habenEntries">
+                                          Haben
+                                      </div>
+                                  </div>
+
+                                  <div class="row">
+                                      <div class="cell" data-title="sollCount">
+                                          1
+                                      </div>
+                                      <div class="cell" data-title="sollEntries">
+                                          500
+                                      </div>
+                                      <div class="cell" data-title="habenCount">
+
+                                      </div>
+                                      <div class="cell" data-title="habenEntries">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </div>
+
+      <div id="passiveSide"></div>-->

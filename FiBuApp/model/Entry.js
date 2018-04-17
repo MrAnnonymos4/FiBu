@@ -1,6 +1,6 @@
 class Entry {
     constructor(sollName, sollSum, habenName, habenSum) {
-        this.id = History;
+        this.id = "1"; //Add history.count()
         this.sollName = sollName;
         this.sollSum = sollSum;
         this.habenName = habenName;
@@ -12,22 +12,21 @@ class Entry {
     * If there is no corresponding account, create a new one and add entry afterwards.
     */
     post() {
-        
-        let sollAccount = registeredAccounts.find(account => account.accountName === sollName);
-        if (sollAccount == !null) {
-            sollAccount.addEntry(true, this.id, this.sollSum);
-        } else {
+        let sollAccount = registeredAccounts.find(account => account.accountName === this.sollName);
+        if (sollAccount == null) {
             let theNewAccount = new Account(this.sollName);
-            theNewAccount.addEntry(false, this.id, this.sollName);
+            theNewAccount.addSollEntry(this);
+        } else {
+            sollAccount.addSollEntry(this);
         }
 
 
-        let habenAccount = registeredAccounts.find(account => account.accountName === habenName);
-        if (sollAccount == !null) {
-            habenAccount.addEntry(false, this.id, this.habenSum);
-        } else {
+        let habenAccount = registeredAccounts.find(account => account.accountName === this.habenName);
+        if (habenAccount == null) {
             let theNewAccount = new Account(this.habenName);
-            theNewAccount.addEntry(false, this.id, this.habenSum);
+            theNewAccount.addHabenEntry(this);
+        } else {
+            habenAccount.addHabenEntry(this);
         }
 
 

@@ -1,6 +1,7 @@
 
 let registeredAccounts = [];
-let thePassiveSideGridster;
+let theMainGridster;
+let theHistory;
 let inputNumber = 2;
 let journalNumber = 1;
 let flag = 0;
@@ -12,7 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function initialize() {
-    thePassiveSideGridster = new Grid("passiveSide", "passiveSideGridster");
+    theMainGridster = new Grid("fibuApplication", "mainGridster");
+    theHistory = new History();
+
+    $(".gridster ul").gridster({
+        widget_base_dimensions: [300, 300],
+        widget_margins: [5, 5],
+    });
 }
 
 
@@ -24,7 +31,7 @@ function buchenButtonClicked() {
     let habenSum = $("#habenSum").val();
     let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
     theEntry.post();
-
+    theHistory.addEntryToHistory(theEntry);
 }
 
 function splitButtonClicked(){
