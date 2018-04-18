@@ -4,7 +4,8 @@ class Table {
         this.theDraggableId = draggableId;
         this.theDraggableHtmlElement = document.getElementById(this.theDraggableId);
         this.theDraggableElement = draggableElement;
-        this.theTable;
+        this.theTableObject;
+        this.theTableHtmlElement;
 
         this.columns = [
             {
@@ -30,20 +31,28 @@ class Table {
 
         let theDescriptionElement = document.createElement("div");
         theDescriptionElement.classList.add("widgetLabel");
-        theDescriptionElement.innerHTML = this.theTableId;
-        let theTableHtmlElement = document.createElement("table");
-        theTableHtmlElement.setAttribute("id", this.theTableId);
+        theDescriptionElement.innerHTML = this.theTableId.replace("Table", "");
+        this.theTableHtmlElement = document.createElement("table");
+        this.theTableHtmlElement.setAttribute("id", this.theTableId);
         this.theDraggableHtmlElement.appendChild(theDescriptionElement);
-        this.theDraggableHtmlElement.appendChild(theTableHtmlElement);
+        this.theDraggableHtmlElement.appendChild(this.theTableHtmlElement);
 
-        this.theTable = $('#' + this.theTableId);
-        this.theTable.bootstrapTable({ columns: this.columns });
+        this.theTableObject = $('#' + this.theTableId);
+        this.theTableObject.bootstrapTable({ columns: this.columns });
     }
 
 
     appendData(theNewData) {
-        this.theTable.bootstrapTable('append', theNewData);
-        this.theDraggableElement.resize(document.getElementById(this.theTableId).offsetHeight + 20);//Resize the widget according to new table size
+        this.theTableObject.bootstrapTable('append', theNewData);
+        this.theDraggableElement.resize(this.getOffsetHeight + 20); //Resize the widget according to new table size
+    }
+
+    getOffsetHeight() {
+        return this.theTableHtmlElement.offsetHeight
+    }
+
+    getOffsetWidth() {
+        return this.theTableHtmlElement.getOffsetWidth
     }
  
 }

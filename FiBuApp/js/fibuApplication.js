@@ -4,6 +4,7 @@ let theHistory;
 let inputNumber = 2;
 let journalNumber = 1;
 let flag = 0;
+let clientSections = [];
 
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
@@ -12,6 +13,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function initialize() {
     theHistory = new History();
+
+    //calculate display sections for account types. 
+    let theClientWidth = document.getElementById("accountSpace").clientWidth;
+    let temp = 0;
+    for (let i = 0; i < 5; i++) {
+        temp = temp + (i + 1 * (theClientWidth / 5)) / 2;
+        clientSections.push(temp);
+    }
+    
 }
 
 

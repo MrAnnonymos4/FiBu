@@ -17,8 +17,8 @@
 }
 
 .draggable {
-    height: 500px;
-    width: 500px;
-    background-color: red;
+    width: 300px;
+    z-index: +1;
+    float: left;
 }
 
