@@ -1,9 +1,8 @@
 class Account {
     constructor(accountName) {
-        this.accountName = accountName;
-        this.gridsterElement = theMainGridster;
-        this.accountWidget = this.gridsterElement.createNewWidget(this.accountName + "Widget");
-        this.accountTable = new Table(this.accountName + "Table", this.accountName + "Widget");
+        this.theAccountId = accountName;
+        this.theDraggableHtmlElement = new Draggable(this.theAccountId + "Draggable");
+        this.accountTable = new Table(this.accountName + "Table", this.theDraggableHtmlElement.theDraggableId, this.theDraggableHtmlElement);
 
         
         registeredAccounts.push(this);

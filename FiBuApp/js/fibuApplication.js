@@ -1,6 +1,5 @@
 
 let registeredAccounts = [];
-let theMainGridster;
 let theHistory;
 let inputNumber = 2;
 let journalNumber = 1;
@@ -12,14 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function initialize() {
-    theMainGridster = new Grid("fibuApplication", "mainGridster");
     theHistory = new History();
-
-    $(".gridster ul").gridster({
-        widget_base_dimensions: [300, 300],
-        widget_margins: [5, 5],
-        resize: true
-    }).data('gridster');
 }
 
 
