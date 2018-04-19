@@ -4,12 +4,10 @@ let theHistory;
 let inputNumber = 2;
 let journalNumber = 1;
 let flag = 0;
-<<<<<<< HEAD
 let newButtonFlag = 0;
 let closingButtonFlag = 0;
-=======
 let clientSections = [];
->>>>>>> 3ffc598be134d13330dda945de803d4157e525b9
+
 
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
