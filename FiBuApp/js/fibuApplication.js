@@ -27,6 +27,12 @@ function initialize() {
     
 }
 
+function alertInfo() {
+
+    alert("Hier folgt die Info zum E-Learning Team");
+
+}
+
 
 function buchenButtonClicked() {
 
@@ -39,10 +45,10 @@ function buchenButtonClicked() {
     theHistory.addEntryToHistory(theEntry);
 
     //Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
-    //document.getElementById('sollName').value = '';
-    //document.getElementById('sollSum').value = '';
-    //document.getElementById('habenName').value = '';
-    //document.getElementById('habenSum').value = '';
+    document.getElementById('sollName').value = '';
+    document.getElementById('sollSum').value = '';
+    document.getElementById('habenName').value = '';
+    document.getElementById('habenSum').value = '';
 }
 
 function splitButtonClicked(){
@@ -203,22 +209,39 @@ function newButtonClicked(){
 
 function closingButtonClicked(){
 
+    checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
+
     if(closingButtonFlag == 0){
     let table = document.getElementById("closing");
 
     let row = table.insertRow(0);
 
     let sollCell = row.insertCell(0);
-    let sollSumCell = row.insertCell(1);
     
-    sollCell.innerHTML= "Text";
-    sollSumCell.innerHTML = "Text";
+    sollCell.innerHTML= "Abschlussbuchungen:";
+
+    for(let i = 1; i <=5; i++){
+
+        row = table.insertRow(i);
+        let checkBoxName = row.insertCell(0);
+        let checkBoxField = row.insertCell(1);
+
+        checkBoxName.innerHTML = checkBoxArray[i-1];
+        checkBoxField.innerHTML = "<input type='checkbox' name='closingBox'  value='" + checkBoxArray[i] + "'>";
+    }
+    row = table.insertRow(6);
+
+    let closingText = row.insertCell(0);
+    let checkButton = row.insertCell(1);
+    
+    closingText.innerHTML= "Inventurbestand einbuchen und erneut Abschluss drücken:";
+    checkButton.innerHTML= "<button id='abschluss' type='button' class='btn btn-default'>Ja</button>";
         
     closingButtonFlag = 1;
 
     }else{
 
-        for(let i = 0; i <= 1; i++){
+        for(let i = 0; i <= 6; i++){
             document.getElementById("closing").deleteRow(0);
         }
     
