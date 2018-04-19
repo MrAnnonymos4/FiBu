@@ -5,6 +5,8 @@ let theHistory;
 let inputNumber = 2;
 let journalNumber = 1;
 let flag = 0;
+let newButtonFlag = 0;
+let closingButtonFlag = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
@@ -123,5 +125,100 @@ function journalButtonClicked(){
         }
 
         flag = 1;
+    }
+}
+
+function newButtonClicked(){
+
+    if(newButtonFlag == 0){
+
+    let table = document.getElementById("newTable");
+
+    let row = table.insertRow(0);
+
+    let sollCell = row.insertCell(0);
+
+    sollCell.innerHTML= "Konto anlegen:";
+
+    row = table.insertRow(1);
+
+    sollCell = row.insertCell(0);
+    sollSumCell = row.insertCell(1);
+
+    sollCell.innerHTML = "<input type='text' id='activeTable'>";
+    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Aktiv</button>";
+
+    row = table.insertRow(2);
+
+    sollCell = row.insertCell(0);
+    sollSumCell = row.insertCell(1);
+
+    sollCell.innerHTML = "<input type='text' id='passiveTable'>";
+    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Passiv</button>";
+
+    row = table.insertRow(3);
+
+    sollCell = row.insertCell(0);
+    sollSumCell = row.insertCell(1);
+
+    sollCell.innerHTML = "<input type='text' id='aufwandTable'>";
+    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Aufwand</button>";
+
+    row = table.insertRow(4);
+
+    sollCell = row.insertCell(0);
+    sollSumCell = row.insertCell(1);
+
+    sollCell.innerHTML = "<input type='text' id='ertragTable'>";
+    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Ertrag</button>";
+
+    row = table.insertRow(5);
+
+    sollCell = row.insertCell(0);
+
+    sollCell.innerHTML= "Konto löschen:";
+
+    row = table.insertRow(6);
+
+    sollCell = row.insertCell(0);
+    sollSumCell = row.insertCell(1);
+
+    sollCell.innerHTML = "<input type='text' id='deleteTable'>";
+    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Löschen</button>";
+
+    newButtonFlag = 1;
+}else{
+
+    for(let i = 0; i <= 6; i++){
+        document.getElementById("newTable").deleteRow(0);
+    }
+
+    newButtonFlag = 0;
+}
+
+}
+
+function closingButtonClicked(){
+
+    if(closingButtonFlag == 0){
+    let table = document.getElementById("closing");
+
+    let row = table.insertRow(0);
+
+    let sollCell = row.insertCell(0);
+    let sollSumCell = row.insertCell(1);
+    
+    sollCell.innerHTML= "Text";
+    sollSumCell.innerHTML = "Text";
+        
+    closingButtonFlag = 1;
+
+    }else{
+
+        for(let i = 0; i <= 1; i++){
+            document.getElementById("closing").deleteRow(0);
+        }
+    
+        closingButtonFlag = 0;
     }
 }

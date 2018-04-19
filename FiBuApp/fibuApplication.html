@@ -65,7 +65,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="index.html">Info</a>
+                    <a href="#">Info</a>
                 </li>
                 <li>
                     <a href="#" target="_blank" rel="noopener">Hilfe</a>
@@ -92,6 +92,18 @@
         <table>
             <tr>
                 <td>
+                    <table id="newTable">
+                        <tr></tr>
+                    </table>
+                </td>
+                <td>
+                    <table id="closing">
+                        <tr></tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <table class="table" id="inputMask">
                         <tbody>
                             <tr style="height: 60px;">
@@ -115,8 +127,8 @@
                     <table class="table">
                         <tbody>
                             <tr style="height: 60px;">
-                                <td><button type="button" class="btn btn-default">Neu</button></td>
-                                <td><button type="button" class="btn btn-default">Abschluss</button></td>
+                                <td><button type="button" class="btn btn-default" onClick="newButtonClicked()">Neu</button></td>
+                                <td><button type="button" class="btn btn-default" onClick="closingButtonClicked()">Abschluss</button></td>
                                 <td><button type="button" class="btn btn-default">Protokoll</button></td>
                             </tr>
                             <tr style="height: 60px;">

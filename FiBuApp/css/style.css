@@ -69,6 +69,19 @@
     bottom: 0;
 }
 
+#newTable {
+    width:100%;
+    height:100px;
+}
+
+#newTable tr td {
+    width: 100%
+}
+
+#newTable  td {
+    padding: 3px;
+}
+
 .scroll {
     padding:15px;
     overflow:auto;
