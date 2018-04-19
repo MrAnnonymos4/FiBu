@@ -12,6 +12,10 @@
     height:90vh;
 }
 
+#accountSpace {
+    height: 90vh;
+}
+
 #activeSide {
     background: black;
     width: 50%;

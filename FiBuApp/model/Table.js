@@ -1,9 +1,11 @@
 class Table {
-    constructor(tableName, widgetId) {
-        this.tableName = tableName;
-        this.widgetId = widgetId;
-        this.widget = $("#" + this.widgetId);
-        this.table;
+    constructor(tableId, draggableId, draggableElement) {
+        this.theTableId = tableId;
+        this.theDraggableId = draggableId;
+        this.theDraggableHtmlElement = document.getElementById(this.theDraggableId);
+        this.theDraggableElement = draggableElement;
+        this.theTableObject;
+        this.theTableHtmlElement;
 
         this.columns = [
             {
@@ -26,30 +28,31 @@ class Table {
                 title: "Haben"
             }
         ]
+
         let theDescriptionElement = document.createElement("div");
         theDescriptionElement.classList.add("widgetLabel");
-        theDescriptionElement.innerHTML = this.tableName;
-        let theTableHtmlElement = document.createElement("table");
-        theTableHtmlElement.setAttribute("id", this.tableName);
-        document.getElementById(this.widgetId).appendChild(theDescriptionElement);
-        document.getElementById(this.widgetId).appendChild(theTableHtmlElement);
+        theDescriptionElement.innerHTML = this.theTableId.replace("Table", "");
+        this.theTableHtmlElement = document.createElement("table");
+        this.theTableHtmlElement.setAttribute("id", this.theTableId);
+        this.theDraggableHtmlElement.appendChild(theDescriptionElement);
+        this.theDraggableHtmlElement.appendChild(this.theTableHtmlElement);
 
-        this.table = $('#' + this.tableName);
-        this.table.bootstrapTable({ columns: this.columns });
+        this.theTableObject = $('#' + this.theTableId);
+        this.theTableObject.bootstrapTable({ columns: this.columns });
     }
 
 
     appendData(theNewData) {
-        this.table.bootstrapTable('append', theNewData);
-        this.resize();
+        this.theTableObject.bootstrapTable('append', theNewData);
+        this.theDraggableElement.resize(this.getOffsetHeight + 20); //Resize the widget according to new table size
     }
 
-    //Resize the widget according to new table size
-    resize() {
-        //let theNewTableWidth = document.getElementById(this.tableName).offsetWidth;
-        let theNewTableHeight = document.getElementById(this.tableName).offsetHeight;
-
-        //this.widget[0].style.width = theNewTableWidth + "px";
-        this.widget[0].style.height = theNewTableHeight + 20 + "px"; // Adding height for css/style.css/.widgetLabel height
+    getOffsetHeight() {
+        return this.theTableHtmlElement.offsetHeight
     }
+
+    getOffsetWidth() {
+        return this.theTableHtmlElement.getOffsetWidth
+    }
+ 
 }
