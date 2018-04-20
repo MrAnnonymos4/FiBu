@@ -40,6 +40,16 @@ function buchenButtonClicked() {
     let sollSum= $("#sollSum").val();
     let habenName = $("#habenName").val();
     let habenSum = $("#habenSum").val();
+
+    let theCheck = new CheckData(sollName, sollSum, habenName, habenSum);
+
+
+    if(theCheck.checkSum() == false){
+
+        console.log("Fehler nach der Ausführung");
+
+    }else{
+
     let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
     theEntry.post();
     theHistory.addEntryToHistory(theEntry);
@@ -49,6 +59,9 @@ function buchenButtonClicked() {
     document.getElementById('sollSum').value = '';
     document.getElementById('habenName').value = '';
     document.getElementById('habenSum').value = '';
+
+    }
+
 }
 
 function splitButtonClicked(){
