@@ -21,6 +21,8 @@ function initialize() {
         temp = temp + (i + 1 * (theClientWidth / 5)) / 2;
         clientSections.push(temp);
     }
+
+    //new Account("EBK", "EBK");
     
 }
 

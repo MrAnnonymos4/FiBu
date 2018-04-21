@@ -1,7 +1,6 @@
 class Draggable {
-    constructor(draggableId, draggableType, xPosition, yPosition) {
+    constructor(draggableId, xPosition, yPosition) {
         this.theDraggableId = draggableId;
-        this.theDraggableType = draggableType;
         this.theDraggableHtmlElement;
         this.theXPostion = xPosition;
         this.theYPosition = yPosition;

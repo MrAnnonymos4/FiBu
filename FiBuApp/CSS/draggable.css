@@ -17,8 +17,10 @@
 }
 
 .draggable {
-    width: 300px;
     z-index: +1;
     float: left;
+   
 }
+
+
 

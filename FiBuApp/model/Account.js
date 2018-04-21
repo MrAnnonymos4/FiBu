@@ -3,7 +3,7 @@ class Account {
         this.theAccountId = accountName;
         this.accountType = accountType;
         this.theDraggableObject = new Draggable(this.theAccountId + "Draggable", this.accountType, this.calculateDraggableXPosition(), 0);//document.getElementById("accountSpace").clientHeight / 2);
-        this.accountTable = new Table(this.theAccountId + "Table", this.theDraggableObject.theDraggableId, this.theDraggableObject);
+        this.accountTable = new Table(this.theAccountId, this.theDraggableObject.theDraggableId, this.theDraggableObject);
         
         registeredAccounts.push(this);
 
@@ -20,23 +20,11 @@ class Account {
     }
 
     addSollEntry(anEntry) {
-        let theNewSollData = [{
-            sollCount: theHistory.getEntryCount(),
-            sollEntries: anEntry.sollSum,
-            habenCount: "",
-            habenEntries: ""
-        }]
-        this.accountTable.appendData(theNewSollData);
+        this.accountTable.addSollData(theHistory.getEntryCount(), anEntry.sollSum);
     }
 
     addHabenEntry(anEntry) {
-        let theNewHabenData = [{
-            sollCount: "",
-            sollEntries: "",
-            habenCount: theHistory.getEntryCount(),
-            habenEntries: anEntry.habenSum
-        }];
-        this.accountTable.appendData(theNewHabenData);
+        this.accountTable.addHabenData(theHistory.getEntryCount(), anEntry.sollSum);
     }
 
 
