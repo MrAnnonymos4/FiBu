@@ -29,8 +29,24 @@ class SollTable {
         this.theSollTableHtmlObject.bootstrapTable({ columns: this.theSollColumns });
     }
 
+    /*
+	Füge neue Daten der Tabelle hinzu. Verhindere dabei Lücken zwischen den Einträgen.
+	Wenn bereits Reihen existieren und nicht eine leere Reihe eingetragen werden soll, dann überprüfe ob die letzte existierende Reihe eine leere ist.
+	Wenn dies der Fall ist, dann suche die letzte Reihe die nicht leer ist und füge neue Reihe dahinter ein.
+	*/
+
     appendSollData(sollCountData, sollSum) {
+		if (this.theSollRows.length > 0 && sollCountData != 0){
+			if (this.theSollRows[this.theSollRows.length - 1].sollCount == 0){
+				this.theSollRows[this.getLastNotEmptyRow()+ 1] = { sollCount: sollCountData, sollEntries: sollSum };
+			} else{
+				this.theSollRows.push({ sollCount: sollCountData, sollEntries: sollSum });
+			}
+		}
+		else{
         this.theSollRows.push({ sollCount: sollCountData, sollEntries: sollSum });
+		}
+
         this.updateSollTableDataset();
     }
 
@@ -41,6 +57,29 @@ class SollTable {
     updateSollTableDataset() {
         this.theSollTableHtmlObject.bootstrapTable('load', this.theSollRows);
     }
+
+	getLastNotEmptyRow(){
+		let tempCount = this.theSollRows.length - 1;
+		for (tempCount; tempCount >= 0; tempCount--){
+			if (this.theSollRows[tempCount].sollCount != ""){
+				return tempCount;
+			}
+		}
+		return -1;
+	}
+
+	/*
+	Ermittle die Summe aller in der Tabelle enthaltenen Einträge.
+	*/
+	calculateEntriesColumnSum(){
+		let entriesSum = 0;
+		for (let tempCount = 0; tempCount < this.theSollRows.length; tempCount++){
+			if(this.theSollRows[tempCount].sollEntries != ""){
+			entriesSum = entriesSum + this.theSollRows[tempCount].sollEntries;
+			}
+		}
+		return entriesSum;
+	}
 
 
 }

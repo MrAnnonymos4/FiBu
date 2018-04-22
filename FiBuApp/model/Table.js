@@ -52,12 +52,17 @@ class Table {
 
     addSollData(sollCount, sollSum) {
         this.theSollTableObject.appendSollData(sollCount, sollSum);
-        this.theHabenTableObject.appendBlankRow();
+		if (this.theSollTableObject.theSollRows.length > this.theHabenTableObject.theHabenRows.length){
+			this.theHabenTableObject.appendBlankRow();
+		}
+ 
     }
 
     addHabenData(habenCount, habenSum) {
         this.theHabenTableObject.appendHabenData(habenCount, habenSum);
-        this.theSollTableObject.appendBlankRow();
+		if (this.theHabenTableObject.theHabenRows.length > this.theSollTableObject.theSollRows.length){
+			this.theSollTableObject.appendBlankRow();
+		}
     }
 
     getOffsetHeight() {

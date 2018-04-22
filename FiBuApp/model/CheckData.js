@@ -21,7 +21,7 @@ class CheckData{
 
       }
 // Prüfen dass Soll und Habenkonto nicht das selbe sind
-        if(this.sollName == this.sollName){
+        if(this.sollName == this.habenName){
             console.log("Man kann nicht soll und haben auf das gleiche Konto buchen");
             return false;
         }

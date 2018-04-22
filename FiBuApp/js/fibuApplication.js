@@ -39,9 +39,9 @@ function alertInfo() {
 function buchenButtonClicked() {
 
     let sollName = $("#sollName").val();
-    let sollSum= $("#sollSum").val();
+    let sollSum= parseInt($("#sollSum").val());
     let habenName = $("#habenName").val();
-    let habenSum = $("#habenSum").val();
+    let habenSum = parseInt($("#habenSum").val());
 
     let theCheck = new CheckData(sollName, sollSum, habenName, habenSum);
 
@@ -57,10 +57,10 @@ function buchenButtonClicked() {
     theHistory.addEntryToHistory(theEntry);
 
     //Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
-    document.getElementById('sollName').value = '';
-    document.getElementById('sollSum').value = '';
-    document.getElementById('habenName').value = '';
-    document.getElementById('habenSum').value = '';
+    //document.getElementById('sollName').value = '';
+    //document.getElementById('sollSum').value = '';
+    //document.getElementById('habenName').value = '';
+    //document.getElementById('habenSum').value = '';
 
     }
 
