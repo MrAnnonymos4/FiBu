@@ -50,14 +50,17 @@ class SollTable {
         this.updateSollTableDataset();
     }
 
+	//Füge in this.theHabenRows eine leere Reihe ein
     appendBlankRow() {
         this.appendSollData("", "");
     }
 
+    //Aktualisiere die angezeigte Tabelle mit den Einträgen in this.theHabenRows;
     updateSollTableDataset() {
         this.theSollTableHtmlObject.bootstrapTable('load', this.theSollRows);
     }
 
+    //Ermittle die letzte Reihe die nicht leer ist. Ist die erste Reihe der Tabelle leer, gebe -1 zurück.
 	getLastNotEmptyRow(){
 		let tempCount = this.theSollRows.length - 1;
 		for (tempCount; tempCount >= 0; tempCount--){
@@ -68,9 +71,7 @@ class SollTable {
 		return -1;
 	}
 
-	/*
-	Ermittle die Summe aller in der Tabelle enthaltenen Einträge.
-	*/
+    //Ermittle die Summe aller in der Tabelle enthaltenen Einträge.
 	calculateEntriesColumnSum(){
 		let entriesSum = 0;
 		for (let tempCount = 0; tempCount < this.theSollRows.length; tempCount++){

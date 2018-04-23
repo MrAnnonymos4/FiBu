@@ -77,7 +77,8 @@ limiter {
 
 .cell {
     display: table-cell;
-    height:40px;
+    height:20px;
+    width: 65px;
 }
 
 @media screen and (max-width: 768px) {
@@ -88,16 +89,15 @@ limiter {
 
 .row .cell {
     font-family: Poppins-Regular;
-
     font-size: 12px;
-    text-align:center;
+    text-align: center;
     color: #666666;
-    line-height: 1.2;
+    line-height: 1.0;
     font-weight: unset !important;
-    padding-top: 12px;
-    padding-bottom: 12px;
     border-bottom: 1px solid #f2f2f2;
-    
+    padding-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 5px;
 }
 
 .row.header .cell {
@@ -156,17 +156,14 @@ limiter {
 @media (max-width: 768px) {
     .row {
         border-bottom: 1px solid #f2f2f2;
-        padding-bottom: 18px;
-        padding-top: 30px;
-        padding-right: 15px;
         margin: 0;
     }
 
         .row .cell {
             border: none;
-            padding-left: 30px;
-            padding-top: 16px;
-            padding-bottom: 16px;
+            padding-bottom:2px;
+            padding-top:2px;
+            padding-left:5px;
         }
 
             .row .cell:nth-child(1) {
@@ -193,5 +190,9 @@ limiter {
 
 .habenTableDiv {
     float: right;
+
+}
+
+.tableSumDiv{
 
 }

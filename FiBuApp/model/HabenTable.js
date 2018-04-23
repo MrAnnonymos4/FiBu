@@ -50,24 +50,17 @@ class HabenTable {
         this.updateHabenTableDataset();
     }
 
-	/*
-	Füge in this.theHabenRows eine leere Reihe ein
-	*/
+	//Füge in this.theHabenRows eine leere Reihe ein
     appendBlankRow() {
         this.appendHabenData("", "");
     }
 
-	/*
-	Aktualisiere die angezeigte Tabelle mit den Einträgen in this.theHabenRows;
-	*/
+	//Aktualisiere die angezeigte Tabelle mit den Einträgen in this.theHabenRows;
     updateHabenTableDataset() {
         this.theHabenTableHtmlObject.bootstrapTable('load', this.theHabenRows);
     }
 
-	/*
-	Ermittle die letzte Reihe die nicht leer ist.
-	Ist die erste Reihe der Tabelle leer, gebe -1 zurück.
-	*/
+	//Ermittle die letzte Reihe die nicht leer ist. Ist die erste Reihe der Tabelle leer, gebe -1 zurück.
 	getLastNotEmptyRow(){
 		let tempCount = this.theHabenRows.length - 1;
 		for (tempCount; tempCount >= 0; tempCount--){
@@ -78,9 +71,7 @@ class HabenTable {
 		return -1;
 	}
 
-	/*
-	Ermittle die Summe aller in der Tabelle enthaltenen Einträge.
-	*/
+	//Ermittle die Summe aller in der Tabelle enthaltenen Einträge.
 	calculateEntriesColumnSum(){
 		let entriesSum = 0;
 		for (let tempCount = 0; tempCount < this.theHabenRows.length; tempCount++){
@@ -89,5 +80,5 @@ class HabenTable {
 			}
 		}
 		return entriesSum;
-	}
+    }
 }
