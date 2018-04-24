@@ -7,6 +7,7 @@ let flag = 0;
 let newButtonFlag = 0;
 let closingButtonFlag = 0;
 let clientSections = [];
+let checkEbk = 0;
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -43,19 +44,17 @@ function buchenButtonClicked() {
     let habenName = $("#habenName").val();
     let habenSum = $("#habenSum").val();
 
-    let theCheck = new CheckData(sollName, sollSum, habenName, habenSum);
+    let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
 
-
-    if(theCheck.checkSum() == false){
+    if(validateEntry(theEntry)== false){
 
         console.log("Fehler nach der Ausführung");
 
     }else{
 
-    let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
     theEntry.post();
     theHistory.addEntryToHistory(theEntry);
-
+    
     //Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
     document.getElementById('sollName').value = '';
     document.getElementById('sollSum').value = '';
@@ -224,6 +223,13 @@ function newButtonClicked(){
 
 function closingButtonClicked(){
 
+    //Wenn EBK Konto geschlossen wird, sollen Soll und Haben verglichen werden. Wenn nicht gleich dann Fehlermeldung
+    //Wenn Laufende Buchungen geschlossen werden Meldung ob vorbereitende Abschlussbuchungen durchgeführt sind.
+    //Wenn Abbruch, dann kann weiter gebucht werden
+    //Wenn Ok GuV und SBK wird angelegt
+    //Nur noch einfache Buchungssätze möglich
+
+
     checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
 
     if(closingButtonFlag == 0){
@@ -262,4 +268,6 @@ function closingButtonClicked(){
     
         closingButtonFlag = 0;
     }
+
+    checkEbk = 1;
 }

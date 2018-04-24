@@ -54,6 +54,10 @@ class Account {
 
         return theDraggableXPosition;
     }
+
+    checkIfAccountHasEbkEntry(){
+        
+    }
 }
 
 
