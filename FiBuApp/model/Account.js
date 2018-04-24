@@ -2,7 +2,7 @@ class Account {
     constructor(accountName, accountType) {
         this.theAccountId = accountName;
         this.accountType = accountType;
-        this.theDraggableObject = new Draggable(this.theAccountId + "Draggable", this.accountType, this.calculateDraggableXPosition(), 0);//document.getElementById("accountSpace").clientHeight / 2);
+        this.theDraggableObject = new Draggable(this.theAccountId + "Draggable", this.calculateDraggableXPosition(), 0);//document.getElementById("accountSpace").clientHeight / 2);
         this.accountTable = new Table(this.theAccountId, this.theDraggableObject.theDraggableId, this.theDraggableObject);
         
         registeredAccounts.push(this);

@@ -29,19 +29,56 @@ class HabenTable {
         this.theHabenTableHtmlObject.bootstrapTable({ columns: this.theHabenColumns });
     }
 
+	/*
+	Füge neue Daten der Tabelle hinzu. Verhindere dabei Lücken zwischen den Einträgen.
+	Wenn bereits Reihen existieren und nicht eine leere Reihe eingetragen werden soll, dann überprüfe ob die letzte existierende Reihe eine leere ist.
+	Wenn dies der Fall ist, dann suche die letzte Reihe die nicht leer ist und füge neue Reihe dahinter ein.
+	*/
+
     appendHabenData(habenCountData, habenSum) {
+		if (this.theHabenRows.length > 0 && habenCountData != 0){
+			if (this.theHabenRows[this.theHabenRows.length - 1].habenCount == 0){
+				this.theHabenRows[this.getLastNotEmptyRow()+ 1] = { habenCount: habenCountData, habenEntries: habenSum };
+			} else{
+				this.theHabenRows.push({ habenCount: habenCountData, habenEntries: habenSum });
+			}
+		}
+		else{
         this.theHabenRows.push({ habenCount: habenCountData, habenEntries: habenSum });
+		}
+
         this.updateHabenTableDataset();
     }
 
+	//Füge in this.theHabenRows eine leere Reihe ein
     appendBlankRow() {
         this.appendHabenData("", "");
     }
 
+	//Aktualisiere die angezeigte Tabelle mit den Einträgen in this.theHabenRows;
     updateHabenTableDataset() {
         this.theHabenTableHtmlObject.bootstrapTable('load', this.theHabenRows);
     }
 
-}
+	//Ermittle die letzte Reihe die nicht leer ist. Ist die erste Reihe der Tabelle leer, gebe -1 zurück.
+	getLastNotEmptyRow(){
+		let tempCount = this.theHabenRows.length - 1;
+		for (tempCount; tempCount >= 0; tempCount--){
+			if (this.theHabenRows[tempCount].habenCount != ""){
+				return tempCount;
+			}
+		}
+		return -1;
+	}
 
-//Todo finde letzten leeren eintrag in liste und ersetze durch vollen wert
+	//Ermittle die Summe aller in der Tabelle enthaltenen Einträge.
+	calculateEntriesColumnSum(){
+		let entriesSum = 0;
+		for (let tempCount = 0; tempCount < this.theHabenRows.length; tempCount++){
+			if(this.theHabenRows[tempCount].habenEntries != ""){
+				entriesSum = entriesSum + this.theHabenRows[tempCount].habenEntries;
+			}
+		}
+		return entriesSum;
+    }
+}
