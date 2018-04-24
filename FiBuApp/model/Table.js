@@ -14,9 +14,6 @@ class Table {
         let theHabenSumDivHtmlElement;
 
         
-
-        
-
         //Tabellen Überschrift Div erstellen
         let theDescriptionElement = document.createElement("div");
         theDescriptionElement.classList.add("widgetLabel");

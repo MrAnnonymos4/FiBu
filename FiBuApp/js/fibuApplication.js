@@ -1,7 +1,5 @@
-
 let registeredAccounts = [];
-let theHistory;
-let inputNumber = 2;
+let history;
 let journalNumber = 1;
 let flag = 0;
 let newButtonFlag = 0;
@@ -15,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function initialize() {
-    theHistory = new History();
+    history = new History();
 
     //calculate display sections for account types. 
     let theClientWidth = document.getElementById("accountSpace").clientWidth;
@@ -25,7 +23,7 @@ function initialize() {
         clientSections.push(temp);
     }
 
-    //new Account("EBK", "EBK");
+    new Account("EBK", "EBK");
     
 }
 
@@ -38,12 +36,30 @@ function alertInfo() {
 
 function buchenButtonClicked() {
 
-    let sollName = $("#sollName").val();
-    let sollSum= parseInt($("#sollSum").val());
-    let habenName = $("#habenName").val();
-    let habenSum = parseInt($("#habenSum").val());
+    let sollName;
+    let habenName;
+    let sollSum;
+    let habenSum;
+    let splitSum;
+    let subEntries = [];
+    let inputRowCount = document.getElementsByClassName("inputRow").length;
 
-    let theCheck = new CheckData(sollName, sollSum, habenName, habenSum);
+    let theEntry = new SplittableEntry($("#sollName" + 0).val(), parseInt($("#sollSum" + 0).val()), $("#habenName" + 0).val(), parseInt($("#habenSum" + 0).val()));
+
+    for (let inputFieldNumber = 1; inputFieldNumber < inputRowCount; inputFieldNumber++) {
+        theEntry.split($("#sollName" + inputFieldNumber).val(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val(), parseInt($("#habenSum" + inputFieldNumber).val()));
+    }
+
+    
+
+    for (let inputRowNumber = 1; inputRowNumber < inputRowCount; inputRowNumber++) {
+
+
+    }
+
+
+
+
 
 
     if(theCheck.checkSum() == false){
@@ -54,7 +70,7 @@ function buchenButtonClicked() {
 
     let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
     theEntry.post();
-    theHistory.addEntryToHistory(theEntry);
+    history.addEntryToHistory(theEntry);
 
     //Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
     //document.getElementById('sollName').value = '';
@@ -69,11 +85,12 @@ function buchenButtonClicked() {
 function splitButtonClicked(){
 
     let table = document.getElementById("inputMask");
+    let inputNumber = document.getElementsByClassName("inputRow").length;
 
-    if(inputNumber <= 5){
+    if(inputNumber <= 6){
 
         let row = table.insertRow(inputNumber);
-
+        row.classList.add("inputRow");
         let numberCell = row.insertCell(0);
         let sollCell = row.insertCell(1);
         let sollSumCell = row.insertCell(2);
@@ -81,16 +98,11 @@ function splitButtonClicked(){
         let habenSumCell = row.insertCell(4);
     
         numberCell.innerHTML = inputNumber;
-        sollCell.innerHTML= "<input type='text' id='sollName'>";
-        sollSumCell.innerHTML = "<input type='number' id='sollSum'>";
-        habenCell.innerHTML = "<input type='text' id='habenName'>";
-        habenSumCell.innerHTML = "<input type='number' id='habenSum'>";
-    
-
+        sollCell.innerHTML = "<input type='text' id='sollName" + inputNumber + "' > ";
+        sollSumCell.innerHTML = "<input type='number' id='sollSum" + inputNumber + "'>";
+        habenCell.innerHTML = "<input type='text' id='habenName" + inputNumber + "'>";
+        habenSumCell.innerHTML = "<input type='number' id='habenSum" + inputNumber + "'>";
     }
-    inputNumber++;
-
-
 }
 
 function journalButtonClicked(){
@@ -170,15 +182,15 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='activeTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Aktiv</button>";
+    sollSumCell.innerHTML = "<button id='newActiveAccount'type='button' class='btn btn-default'>Aktiv</button>";
 
     row = table.insertRow(2);
 
     sollCell = row.insertCell(0);
     sollSumCell = row.insertCell(1);
 
-    sollCell.innerHTML = "<input type='text' id='passiveTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Passiv</button>";
+    sollCell.innerHTML = "<input type='text' id='passivTable'>";
+    sollSumCell.innerHTML = "<button id='newPassivAccount'type='button' class='btn btn-default'>Passiv</button>";
 
     row = table.insertRow(3);
 
@@ -186,7 +198,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='aufwandTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Aufwand</button>";
+    sollSumCell.innerHTML = "<button id='newAufwandAccount'type='button' class='btn btn-default'>Aufwand</button>";
 
     row = table.insertRow(4);
 
@@ -194,7 +206,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='ertragTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Ertrag</button>";
+    sollSumCell.innerHTML = "<button id='newErtragAccount'type='button' class='btn btn-default'>Ertrag</button>";
 
     row = table.insertRow(5);
 
@@ -208,7 +220,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='deleteTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveTable'type='button' class='btn btn-default'>Löschen</button>";
+    sollSumCell.innerHTML = "<button id='newDeleteAccount'type='button' class='btn btn-default'>Löschen</button>";
 
     newButtonFlag = 1;
 }else{
@@ -220,6 +232,26 @@ function newButtonClicked(){
     newButtonFlag = 0;
 }
 
+}
+
+function newAktivAccountButtonClicked() {
+    new Account(document.getElementById("newActiveAccount").val(), "aktiv")
+}
+
+function newPassivAccountButtonClicked() {
+    new Account(document.getElementById("newPassivAccount").val(), "passiv")
+}
+
+function newAufwandAccountButtonClicked() {
+    new Account(document.getElementById("newAufwandAccount").val(), "aufwand")
+}
+
+function newErtragAccountButtonClicked() {
+    new Account(document.getElementById("newErtragAccount").val(), "ertrag")
+}
+
+function deleteAccountButtonClicked() {
+    //Todo
 }
 
 function closingButtonClicked(){

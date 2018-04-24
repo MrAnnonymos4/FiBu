@@ -1,10 +1,11 @@
-class Entry {
+class SplittableEntry {
     constructor(sollName, sollSum, habenName, habenSum) {
         this.id = history.getEntryCount();
-        this.sollName = sollName;
-        this.sollSum = sollSum;
-        this.habenName = habenName;
-        this.habenSum = habenSum;
+        this.sollName = [sollName];
+        this.sollSum = [sollSum];
+        this.habenName = [habenName];
+        this.habenSum = [habenSum];
+        this.subEntries = [];
     }
 
     /*
@@ -31,5 +32,19 @@ class Entry {
 
 
         
+    }
+
+    addSplitSoll(sollName, sollSum) {
+        this.sollName.push(sollName);
+        this.sollSum.push(sollSum);
+    }
+
+    addSplitHaben(habenName, habenSum) {
+        this.habenName.push(habenName);
+        this.habenSum.push(sollSum);
+    }
+
+    split(sollName, sollSum, habenName, habenSum) {
+        this.subEntries.push(sollName, sollSum, habenName, habenSum);
     }
 }

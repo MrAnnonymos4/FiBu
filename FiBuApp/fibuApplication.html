@@ -39,6 +39,8 @@
     <script src="model/Table.js"></script>
     <script src="model/SollTable.js"></script>
     <script src="model/HabenTable.js"></script>
+    <script src="model/SplittableEntry.js"></script>
+    <script src="model/SplitSubEntry.js"></script>
     <script src="js/draggable.js"></script>
     <script src="model/Draggable.js"></script>
     <script src="js/fibuApplication.js"></script>
@@ -125,19 +127,19 @@
                 <td>
                     <table class="table" id="inputMask">
                         <tbody>
-                            <tr style="height: 60px;">
+                            <tr style="height: 60px;" class="inputRow">
                                 <td scope="col">Nr.</td>
                                 <td scope="col">Sollbuchung</td>
                                 <td scope="col">Betrag</td>
                                 <td scope="col">Habenbuchung</td>
                                 <td scope="col">Betrag</td>
                             </tr>
-                            <tr style="height: 60px;">
+                            <tr style="height: 60px;" class="inputRow">
                                 <td scope="row">1</td>
-                                <td><input type="text" id="sollName"></td>
-                                <td><input type="number" id="sollSum"></td>
-                                <td><input type="text" id="habenName"></td>
-                                <td><input type="number" id="habenSum"></td>
+                                <td><input type="text" id="sollName0"></td>
+                                <td><input type="number" id="sollSum0"></td>
+                                <td><input type="text" id="habenName0"></td>
+                                <td><input type="number" id="habenSum0"></td>
                             </tr>
                         </tbody>
                     </table>
