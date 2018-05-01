@@ -44,31 +44,24 @@ function buchenButtonClicked() {
     let subEntries = [];
     let inputRowCount = document.getElementsByClassName("inputRow").length;
 
-    let theEntry = new SplittableEntry($("#sollName" + 0).val(), parseInt($("#sollSum" + 0).val()), $("#habenName" + 0).val(), parseInt($("#habenSum" + 0).val()));
+    let theEntry = new SplittableEntry($("#sollName" + 1).val(), parseInt($("#sollSum" + 1).val()), $("#habenName" + 1).val(), parseInt($("#habenSum" + 1).val()));
 
-    for (let inputFieldNumber = 1; inputFieldNumber < inputRowCount; inputFieldNumber++) {
-        theEntry.split($("#sollName" + inputFieldNumber).val(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val(), parseInt($("#habenSum" + inputFieldNumber).val()));
+    for (let inputFieldNumber = 2; inputFieldNumber <= inputRowCount; inputFieldNumber++) {
+        theEntry.split($("#sollName" + inputFieldNumber).val(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val(), ($("#habenSum" + inputFieldNumber).val()));
     }
 
-    
-
-    for (let inputRowNumber = 1; inputRowNumber < inputRowCount; inputRowNumber++) {
-
-
-    }
+    theEntry.postSubEntries();
 
 
 
 
+    //if (validateEntry(theEntry) == false) {
+
+    ///    console.log("Fehler nach der Ausführung");
+
+    //}else{
 
 
-    if(theCheck.checkSum() == false){
-
-        console.log("Fehler nach der Ausführung");
-
-    }else{
-
-    let theEntry = new Entry(sollName, sollSum, habenName, habenSum);
     theEntry.post();
     history.addEntryToHistory(theEntry);
 
@@ -78,18 +71,19 @@ function buchenButtonClicked() {
     //document.getElementById('habenName').value = '';
     //document.getElementById('habenSum').value = '';
 
-    }
+    //}
 
 }
 
 function splitButtonClicked(){
 
     let table = document.getElementById("inputMask");
-    let inputNumber = document.getElementsByClassName("inputRow").length;
+    let inputNumber = document.getElementsByClassName("inputRow").length+1;
 
     if(inputNumber <= 6){
 
         let row = table.insertRow(inputNumber);
+
         row.classList.add("inputRow");
         let numberCell = row.insertCell(0);
         let sollCell = row.insertCell(1);
@@ -102,6 +96,7 @@ function splitButtonClicked(){
         sollSumCell.innerHTML = "<input type='number' id='sollSum" + inputNumber + "'>";
         habenCell.innerHTML = "<input type='text' id='habenName" + inputNumber + "'>";
         habenSumCell.innerHTML = "<input type='number' id='habenSum" + inputNumber + "'>";
+
     }
 }
 
@@ -114,7 +109,7 @@ function journalButtonClicked(){
         flag = 0;
         journalNumber = 1;
 
-        for(let theIndex = 0; theIndex < theHistory.historyEntries.length + 2; theIndex++){
+        for(let theIndex = 0; theIndex < history.historyEntries.length + 2; theIndex++){
 
             document.getElementById("journalTable").deleteRow(0);
 
@@ -140,7 +135,7 @@ function journalButtonClicked(){
         habenCell.innerHTML = "Habenkonto";
         habenSumCell.innerHTML = "Habenbetrag";
 
-        for(let i = 0; i < theHistory.historyEntries.length; i++){
+        for(let i = 0; i < history.historyEntries.length; i++){
 
             let row = table.insertRow(journalNumber + 1);
     
@@ -151,10 +146,10 @@ function journalButtonClicked(){
             let habenSumCell = row.insertCell(4);
     
             numberCell.innerHTML = journalNumber;
-            sollCell.innerHTML= theHistory.historyEntries[i].sollName;
-            sollSumCell.innerHTML = theHistory.historyEntries[i].sollSum;
-            habenCell.innerHTML = theHistory.historyEntries[i].habenName;
-            habenSumCell.innerHTML = theHistory.historyEntries[i].habenSum;
+            sollCell.innerHTML= history.historyEntries[i].sollName;
+            sollSumCell.innerHTML = history.historyEntries[i].sollSum;
+            habenCell.innerHTML = history.historyEntries[i].habenName;
+            habenSumCell.innerHTML = history.historyEntries[i].habenSum;
     
             journalNumber++;
     

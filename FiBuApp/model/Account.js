@@ -20,11 +20,11 @@ class Account {
     }
 
     addSollEntry(anEntry) {
-        this.accountTable.addSollData(theHistory.getEntryCount(), anEntry.sollSum);
+        this.accountTable.addSollData(history.getEntryCount(), anEntry.sollSum);
     }
 
     addHabenEntry(anEntry) {
-        this.accountTable.addHabenData(theHistory.getEntryCount(), anEntry.sollSum);
+        this.accountTable.addHabenData(history.getEntryCount(), anEntry.habenSum);
     }
 
 
@@ -53,6 +53,10 @@ class Account {
         }
 
         return theDraggableXPosition;
+    }
+
+    checkIfAccountHasEbkEntry(){
+        
     }
 }
 
