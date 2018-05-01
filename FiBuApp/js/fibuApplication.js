@@ -7,7 +7,7 @@ let flag = 0;
 let newButtonFlag = 0;
 let closingButtonFlag = 0;
 let clientSections = [];
-let checkEbk = 0;
+let checkAccounting = 0;
 
 
 document.addEventListener("DOMContentLoaded", function () {
