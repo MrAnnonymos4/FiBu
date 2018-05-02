@@ -1,9 +1,9 @@
 class Entry {
     constructor(sollName, sollSum, habenName, habenSum) {
         this.id = history.getEntryCount();
-        this.sollName = sollName;
+        this.sollName = sollName.toUpperCase();
         this.sollSum = sollSum;
-        this.habenName = habenName;
+        this.habenName = habenName.toUpperCase();
         this.habenSum = habenSum;
     }
 
