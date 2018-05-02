@@ -5,6 +5,8 @@ let flag = 0;
 let newButtonFlag = 0;
 let closingButtonFlag = 0;
 let clientSections = [];
+let possibleAccounts = ["Grundstücke", "Maschinen", "Fahrzeuge", "BGA", "Im. Vermögensgegenstände", "Finanzanlagen", "Langfristige Verbindlichkeiten", "EK", "Rückstellungen", "Kasse", "Bank", "Rohstoffe", "Hilfs- Betriebsstoffe", "Unfertige Erzeugnisse"];
+
 
 
 document.addEventListener("DOMContentLoaded", function () {

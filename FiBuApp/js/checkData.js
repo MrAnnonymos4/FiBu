@@ -125,13 +125,13 @@ function checkForSbkGuv(theEntry){
 
     //Buchung von GUV in SBK oder andersrum ist nicht möglich
     if(theEntry.sollName.value == "EBK"){
-        if(theEntry.habenName.value == "guv" ||theEntry.habenName.value == "SBK"){
+        if(theEntry.habenName.value == "GUV" ||theEntry.habenName.value == "SBK"){
             console.log("Eingangsbuchungen dürfen nicht in das GuV oder SBK");
             return false;
         }
     
     }else if(theEntry.habenName.value == "EBK"){
-        if(theEntry.sollName.value == "guv" || theEntry.sollName.value == "SBK"){
+        if(theEntry.sollName.value == "GUV" || theEntry.sollName.value == "SBK"){
             console.log("Eingangsbuchungen dürfen nicht in das GuV oder SBK")
             return false;
         }
@@ -171,14 +171,14 @@ function checkForIncExpAcc(theEntry){
 
 function checkGuv(theEntry){
     //Buchung gegen EBK / SBK nicht möglich bei Guv
-    if(theEntry.sollName.value == "guv"){
+    if(theEntry.sollName.value == "GUV"){
         if(theEntry.habenName.value == "EBK" || theEntry.habenName.value =="SBK"){
             console.log("Buchungen in das GuV dürfen nicht in das EBK oder SBK");
             return false;
         }
     }
 
-    if(theEntry.habenName.value == "guv"){
+    if(theEntry.habenName.value == "GUV"){
         if(theEntry.sollName.value == "EBK" ||theEntry.habenName.value == "SBK"){
             console.log("Buchungen in das GuV dürfen nicht in das EBK oder SBK");
             return false;
@@ -189,7 +189,7 @@ function checkGuv(theEntry){
 function checkGuvAccounting(theEntry){
 
     //Wenn im Soll GuV gebucht wurde
-    if(theEntry.sollName.value == "guv"){
+    if(theEntry.sollName.value == "GUV"){
 
     //Prüfen ob im Haben ein Ertragskonto ist
     //Wenn Ja Fehlermeldung (Abschluss Ertragskonto im Haben nicht möglich)
@@ -202,7 +202,7 @@ function checkGuvAccounting(theEntry){
     }
 
     //Wenn im Haben GuV gebucht wurde
-    if(theEntry.habenName.value == "guv"){
+    if(theEntry.habenName.value == "GUV"){
 
     //Prüfen ob im Soll ein Aufwanskonto ist
     //Wenn Ja Fehlermeldung(Abschluss Aufwandskonto im Soll nicht möglich)
@@ -217,13 +217,13 @@ function checkGuvAccounting(theEntry){
 
 function checkSbkWare(theEntry){
     //Wenn Warenbestand an SBK gebucht wird Fehlermeldung
-    if(theEntry.sollName.value == "Warenbestand" && theEntry.habenName.value == "SBK"){
+    if(theEntry.sollName.value == "WARENBESTAND" && theEntry.habenName.value == "SBK"){
         console.log("Warenbestand kann nicht an SBK gebucht werden.");
         return false;
     }
     //(Abschluss Warenbestand im Soll nicht möglich)
 
-    if(theEntry.sollName.value == "SBK" && theEntry.habenName.value == "Warenbestand"){
+    if(theEntry.sollName.value == "SBK" && theEntry.habenName.value == "WARENBESTAND"){
         //Wenn SBK an Ware prüfen ob Warenbestandskonto angelegt wurde
         //Wenn nicht Hinweis das es nicht angelegt ist
         let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
@@ -246,7 +246,7 @@ function checkSBK(theEntry){
     if(theEntry.sollName.value == "SBK"){
         //Prüfen ob das Habenkonto existiert und nicht Warenbestand ist
         let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
-        if(habenAccount == null || habenAccount == "Warenbestand"){
+        if(habenAccount == null || habenAccount == "WARENBESTAND"){
             console.log("Fehler beim Habenkonto.");
             return false;
         }
