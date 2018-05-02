@@ -30,7 +30,7 @@ class Draggable {
         this.theYPostion = yData;
 
         if (this.theXPostion == null) {
-            this.theXPostion = clientSections[2];
+            this.theXPostion = xData;
         }
 
         if (this.theYPostion == null) {
@@ -39,11 +39,11 @@ class Draggable {
 
         this.theDraggableHtmlElement.style.webkitTransform =
             this.theDraggableHtmlElement.style.transform =
-            'translate(' + this.theXPostion + 'px, ' + this.theYPostion + 'px)';
+            'translate(' + this.theXPostion + 'px, ' + 0 + 'px)';
 
         // update the position attributes
-        this.theDraggableHtmlElement.setAttribute('data-x', this.theXPostion);
-        this.theDraggableHtmlElement.setAttribute('data-y', this.theYPostion);
+       this.theDraggableHtmlElement.setAttribute('data-x', this.theXPostion);
+       this.theDraggableHtmlElement.setAttribute('data-y', this.theYPostion);
     }
 
     

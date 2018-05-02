@@ -19,11 +19,12 @@ function initialize() {
     let theClientWidth = document.getElementById("accountSpace").clientWidth;
     let temp = 0;
     for (let i = 0; i < 5; i++) {
-        temp = temp + (i + 1 * (theClientWidth / 5)) / 2;
-        clientSections.push(temp);
+        temp = temp + (theClientWidth / 5) / 2;
+        clientSections.push((theClientWidth / 5) *i);
     }
 
-    new Account("EBK", "EBK");
+
+    new Account("EBK", "ebk");
     
 }
 
@@ -230,63 +231,75 @@ function newButtonClicked(){
 }
 
 function newAktivAccountButtonClicked() {
-    new Account(document.getElementById("newActiveAccount").val(), "aktiv")
-}
-
-function newPassivAccountButtonClicked() {
-    new Account(document.getElementById("newPassivAccount").val(), "passiv")
-}
-
-function newAufwandAccountButtonClicked() {
-    new Account(document.getElementById("newAufwandAccount").val(), "aufwand")
-}
-
-function newErtragAccountButtonClicked() {
-    new Account(document.getElementById("newErtragAccount").val(), "ertrag")
-}
-
-function deleteAccountButtonClicked() {
-    //Todo
-}
-
-function closingButtonClicked(){
-
-    checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
-
-    if(closingButtonFlag == 0){
-    let table = document.getElementById("closing");
-
-    let row = table.insertRow(0);
-
-    let sollCell = row.insertCell(0);
-    
-    sollCell.innerHTML= "Abschlussbuchungen:";
-
-    for(let i = 1; i <=5; i++){
-
-        row = table.insertRow(i);
-        let checkBoxName = row.insertCell(0);
-        let checkBoxField = row.insertCell(1);
-
-        checkBoxName.innerHTML = checkBoxArray[i-1];
-        checkBoxField.innerHTML = "<input type='checkbox' name='closingBox'  value='" + checkBoxArray[i] + "'>";
+    let newAccountName = document.getElementById("newActivAccount").val();
+    if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+        new Account(newAccountName, "aktiv");
     }
-    row = table.insertRow(6);
 
-    let closingText = row.insertCell(0);
-    let checkButton = row.insertCell(1);
-    
-    closingText.innerHTML= "Inventurbestand einbuchen und erneut Abschluss drücken:";
-    checkButton.innerHTML= "<button id='abschluss' type='button' class='btn btn-default'>Ja</button>";
-        
-    closingButtonFlag = 1;
-
-    }else{
-
-        for(let i = 0; i <= 6; i++){
-            document.getElementById("closing").deleteRow(0);
+    function newPassivAccountButtonClicked() {
+        let newAccountName = document.getElementById("newPassivAccount").val();
+        if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+            new Account(newAccountName, "passiv");
         }
-    
-        closingButtonFlag = 0;
+    }
+
+    function newAufwandAccountButtonClicked() {
+        let newAccountName = document.getElementById("newAufwandAccount").val();
+        if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+            new Account(newAccountName, "aufwand");
+        }
+    }
+
+    function newErtragAccountButtonClicked() {
+        let newAccountName = document.getElementById("newErtragAccount").val();
+        if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+            new Account(newAccountName, "ertrag");
+        }
+    }
+
+    function deleteAccountButtonClicked() {
+        //Todo
+    }
+
+    function closingButtonClicked() {
+
+        checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
+
+        if (closingButtonFlag == 0) {
+            let table = document.getElementById("closing");
+
+            let row = table.insertRow(0);
+
+            let sollCell = row.insertCell(0);
+
+            sollCell.innerHTML = "Abschlussbuchungen:";
+
+            for (let i = 1; i <= 5; i++) {
+
+                row = table.insertRow(i);
+                let checkBoxName = row.insertCell(0);
+                let checkBoxField = row.insertCell(1);
+
+                checkBoxName.innerHTML = checkBoxArray[i - 1];
+                checkBoxField.innerHTML = "<input type='checkbox' name='closingBox'  value='" + checkBoxArray[i] + "'>";
+            }
+            row = table.insertRow(6);
+
+            let closingText = row.insertCell(0);
+            let checkButton = row.insertCell(1);
+
+            closingText.innerHTML = "Inventurbestand einbuchen und erneut Abschluss drücken:";
+            checkButton.innerHTML = "<button id='abschluss' type='button' class='btn btn-default'>Ja</button>";
+
+            closingButtonFlag = 1;
+
+        } else {
+
+            for (let i = 0; i <= 6; i++) {
+                document.getElementById("closing").deleteRow(0);
+            }
+
+            closingButtonFlag = 0;
+        }
     }
 }
