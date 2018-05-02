@@ -55,11 +55,11 @@ function buchenButtonClicked() {
 
 
 
-    //if (validateEntry(theEntry) == false) {
+    if (validateEntry(theEntry) == false) {
 
-    ///    console.log("Fehler nach der Ausführung");
+       console.log("Fehler nach der Ausführung");
 
-    //}else{
+    }else{
 
 
     theEntry.post();
@@ -71,7 +71,7 @@ function buchenButtonClicked() {
     //document.getElementById('habenName').value = '';
     //document.getElementById('habenSum').value = '';
 
-    //}
+    }
 
 }
 
