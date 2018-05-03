@@ -175,7 +175,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='activeTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveAccount'type='button' class='btn btn-default'>Aktiv</button>";
+    sollSumCell.innerHTML = "<button id='newActiveAccount'type='button' onclick='newActivAccountButtonClicked()' class='btn btn-default'>Aktiv</button>";
 
     row = table.insertRow(2);
 
@@ -183,7 +183,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='passivTable'>";
-    sollSumCell.innerHTML = "<button id='newPassivAccount'type='button' class='btn btn-default'>Passiv</button>";
+    sollSumCell.innerHTML = "<button id='newPassivAccount'type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>";
 
     row = table.insertRow(3);
 
@@ -191,7 +191,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='aufwandTable'>";
-    sollSumCell.innerHTML = "<button id='newAufwandAccount'type='button' class='btn btn-default'>Aufwand</button>";
+    sollSumCell.innerHTML = "<button id='newAufwandAccount'type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>";
 
     row = table.insertRow(4);
 
@@ -199,7 +199,7 @@ function newButtonClicked(){
     sollSumCell = row.insertCell(1);
 
     sollCell.innerHTML = "<input type='text' id='ertragTable'>";
-    sollSumCell.innerHTML = "<button id='newErtragAccount'type='button' class='btn btn-default'>Ertrag</button>";
+    sollSumCell.innerHTML = "<button id='newErtragAccount'type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>";
 
     row = table.insertRow(5);
 
@@ -227,7 +227,7 @@ function newButtonClicked(){
 
 }
 
-function newAktivAccountButtonClicked() {
+    function newAktivAccountButtonClicked() {
     let newAccountName = document.getElementById("newActivAccount").val();
     if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
         new Account(newAccountName, "aktiv");

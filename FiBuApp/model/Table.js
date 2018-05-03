@@ -61,8 +61,8 @@ class Table {
     }
 
     //Neue Soll Daten der Tabelle hinzufügen. Bei Haben Tabelle eine leere Zeile einfügen. Dann Summe in entsprechenden Summen Div aktualisieren.
-    addSollData(sollCount, sollSum) {
-        this.theSollTableObject.appendSollData(sollCount, sollSum);
+    addSollData(sollName, sollSum) {
+        this.theSollTableObject.appendSollData(sollName, sollSum);
 		if (this.theSollTableObject.theSollRows.length > this.theHabenTableObject.theHabenRows.length){
 			this.theHabenTableObject.appendBlankRow();
         }
@@ -70,8 +70,8 @@ class Table {
     }
 
     //Neue Haben Daten der Tabelle hinzufügen. Bei Haben Tabelle eine leere Zeile einfügen. Dann Summe in entsprechenden Summen Div aktualisieren.
-    addHabenData(habenCount, habenSum) {
-        this.theHabenTableObject.appendHabenData(habenCount, habenSum);
+    addHabenData(habenName, habenSum) {
+        this.theHabenTableObject.appendHabenData(habenName, habenSum);
 		if (this.theHabenTableObject.theHabenRows.length > this.theSollTableObject.theSollRows.length){
 			this.theSollTableObject.appendBlankRow();
         }

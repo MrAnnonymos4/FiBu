@@ -28,7 +28,7 @@ limiter {
     width: 100%;
     display: table;
     margin: 0;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 @media screen and (max-width: 768px) {
@@ -199,5 +199,6 @@ limiter {
 }
 
 .widgetLabel{
-
+    font-size:12px;
+    text-align: center;
 }

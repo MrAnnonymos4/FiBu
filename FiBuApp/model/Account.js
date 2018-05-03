@@ -20,11 +20,11 @@ class Account {
     }
 
     addSollEntry(anEntry) {
-        this.accountTable.addSollData(history.getEntryCount(), anEntry.sollSum);
+        this.accountTable.addSollData(anEntry.sollName, anEntry.sollSum);
     }
 
     addHabenEntry(anEntry) {
-        this.accountTable.addHabenData(history.getEntryCount(), anEntry.habenSum);
+        this.accountTable.addHabenData(anEntry.habenName, anEntry.habenSum);
     }
 
 
@@ -57,11 +57,16 @@ class Account {
     //Berechne die Y Position eines Draggables. Summiere dabei die Höhe aller bereits existierenden Draggables die den selben Account Typ beinhalten.
     calculateDraggableYPosition() {
         let yPosition = 0;
-        for (let tempCount = 0; tempCount < registeredAccounts.length; tempCount++) {
-            if (registeredAccounts[tempCount].accountType == this.accountType) {
-                yPosition = yPosition + registeredAccounts[tempCount].theDraggableObject.getHtmlHeight();
+        
+        if (this.accountType != "ebk") {
+            for (let tempCount = 0; tempCount < registeredAccounts.length; tempCount++) {
+                if (registeredAccounts[tempCount].accountType == this.accountType) {
+                    yPosition = yPosition + registeredAccounts[tempCount].theDraggableObject.getHtmlHeight();
+                }
             }
-        }
+            //Offset hinzufügen, sodass alle Konten unter EBK stehen.
+            yPosition = yPosition + 30;
+        } 
         return yPosition
     }
 }

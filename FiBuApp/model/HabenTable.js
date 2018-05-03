@@ -6,8 +6,8 @@ class HabenTable {
         this.theHabenColumns = [
             {
                 class: "cell",
-                field: "habenCount",
-                title: "#"
+                field: "habenName",
+                title: "H"
             },
             {
                 class: "cell",
@@ -35,16 +35,16 @@ class HabenTable {
 	Wenn dies der Fall ist, dann suche die letzte Reihe die nicht leer ist und füge neue Reihe dahinter ein.
 	*/
 
-    appendHabenData(habenCountData, habenSum) {
-		if (this.theHabenRows.length > 0 && habenCountData != 0){
-			if (this.theHabenRows[this.theHabenRows.length - 1].habenCount == 0){
-				this.theHabenRows[this.getLastNotEmptyRow()+ 1] = { habenCount: habenCountData, habenEntries: habenSum };
+    appendHabenData(habenNameData, habenSum) {
+		if (this.theHabenRows.length > 0 && habenNameData != 0){
+			if (this.theHabenRows[this.theHabenRows.length - 1].habenName == 0){
+				this.theHabenRows[this.getLastNotEmptyRow()+ 1] = { habenName: habenNameData, habenEntries: habenSum };
 			} else{
-				this.theHabenRows.push({ habenCount: habenCountData, habenEntries: habenSum });
+				this.theHabenRows.push({ habenName: habenNameData, habenEntries: habenSum });
 			}
 		}
 		else{
-        this.theHabenRows.push({ habenCount: habenCountData, habenEntries: habenSum });
+        this.theHabenRows.push({ habenName: habenNameData, habenEntries: habenSum });
 		}
 
         this.updateHabenTableDataset();
@@ -64,7 +64,7 @@ class HabenTable {
 	getLastNotEmptyRow(){
 		let tempCount = this.theHabenRows.length - 1;
 		for (tempCount; tempCount >= 0; tempCount--){
-			if (this.theHabenRows[tempCount].habenCount != ""){
+			if (this.theHabenRows[tempCount].habenName != ""){
 				return tempCount;
 			}
 		}

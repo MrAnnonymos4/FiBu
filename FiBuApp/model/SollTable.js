@@ -6,8 +6,8 @@ class SollTable {
         this.theSollColumns = [
             {
                 class: "cell",
-                field: "sollCount",
-                title: "#"
+                field: "sollName",
+                title: "S"
             },
             {
                 class: "cell",
@@ -35,16 +35,16 @@ class SollTable {
 	Wenn dies der Fall ist, dann suche die letzte Reihe die nicht leer ist und füge neue Reihe dahinter ein.
 	*/
 
-    appendSollData(sollCountData, sollSum) {
-		if (this.theSollRows.length > 0 && sollCountData != 0){
-			if (this.theSollRows[this.theSollRows.length - 1].sollCount == 0){
-				this.theSollRows[this.getLastNotEmptyRow()+ 1] = { sollCount: sollCountData, sollEntries: sollSum };
+    appendSollData(sollName, sollSum) {
+        if (this.theSollRows.length > 0 && sollName != 0){
+			if (this.theSollRows[this.theSollRows.length - 1].sollName == 0){
+                this.theSollRows[this.getLastNotEmptyRow() + 1] = { sollName: sollName, sollEntries: sollSum };
 			} else{
-				this.theSollRows.push({ sollCount: sollCountData, sollEntries: sollSum });
+                this.theSollRows.push({ sollName: sollName, sollEntries: sollSum });
 			}
 		}
 		else{
-        this.theSollRows.push({ sollCount: sollCountData, sollEntries: sollSum });
+            this.theSollRows.push({ sollName: sollName, sollEntries: sollSum });
 		}
 
         this.updateSollTableDataset();
@@ -64,7 +64,7 @@ class SollTable {
 	getLastNotEmptyRow(){
 		let tempCount = this.theSollRows.length - 1;
 		for (tempCount; tempCount >= 0; tempCount--){
-			if (this.theSollRows[tempCount].sollCount != ""){
+			if (this.theSollRows[tempCount].sollName != ""){
 				return tempCount;
 			}
 		}
