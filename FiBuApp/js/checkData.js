@@ -207,6 +207,14 @@ function checkGuvAccounting(theEntry){
     if(theEntry.sollName == "GUV"){
 
     //Prüfen ob im Haben ein Ertragskonto ist
+    for(i = 0;  i <= registeredAccounts.length; i++){
+        if(theEntry.sollName == registeredAccounts[i].theAccountId){
+            if(registeredAccounts[i].accountType == "ertrag"){
+                console.log("Fehler. Konto darf kein Ertragskonto sein.")
+                return false;
+            }
+        }
+    }
     //Wenn Ja Fehlermeldung (Abschluss Ertragskonto im Haben nicht möglich)
     //Wenn Nein Prüfen ob es das Habenkonto gibt
     let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
@@ -219,7 +227,15 @@ function checkGuvAccounting(theEntry){
     //Wenn im Haben GuV gebucht wurde
     if(theEntry.habenName == "GUV"){
 
-    //Prüfen ob im Soll ein Aufwanskonto ist
+    //Prüfen ob im Soll ein Aufwandskonto ist
+    for(i = 0;  i <= registeredAccounts.length; i++){
+        if(theEntry.sollName == registeredAccounts[i].theAccountId){
+            if(registeredAccounts[i].accountType == "aufwand"){
+                console.log("Fehler. Konto darf kein Ertragskonto sein.")
+                return false;
+            }
+        }
+    }
     //Wenn Ja Fehlermeldung(Abschluss Aufwandskonto im Soll nicht möglich)
     //Wenn Nein Prüfen ob es das Sollkonto gibts
     let sollAccount = registeredAccounts.find(account => account.theAccountId === theEntry.sollName);
@@ -252,6 +268,7 @@ function checkSbkWare(theEntry){
 }
 
 function checkAufwandBestand(theEntry){
+    //Prüfen ob die Konten Aufwands oder Bestandskonten sind
     //Wenn Konten schon vorhanden sind Buchen
     //Wenn nicht Hinweis (Fehlendes Konto)
 }
