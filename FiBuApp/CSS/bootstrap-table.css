@@ -82,8 +82,8 @@
 
 .fixed-table-container thead th .th-inner,
 .fixed-table-container tbody td .th-inner {
-    padding: 8px;
-    line-height: 24px;
+    padding: 2px;
+    line-height: 14px;
     vertical-align: top;
     overflow: hidden;
     text-overflow: ellipsis;

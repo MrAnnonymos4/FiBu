@@ -7,8 +7,6 @@ let closingButtonFlag = 0;
 let clientSections = [];
 let possibleAccounts = ["Grundstücke", "Maschinen", "Fahrzeuge", "BGA", "Im. Vermögensgegenstände", "Finanzanlagen", "Langfristige Verbindlichkeiten", "EK", "Rückstellungen", "Kasse", "Bank", "Rohstoffe", "Hilfs- Betriebsstoffe", "Unfertige Erzeugnisse"];
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
 });
@@ -24,10 +22,7 @@ function initialize() {
         temp = temp + (theClientWidth / 5) / 2;
         clientSections.push((theClientWidth / 5) *i);
     }
-
-
-    new Account("EBK", "ebk");
-    
+    new Account("EBK", "ebk");  
 }
 
 function alertInfo() {
@@ -52,29 +47,29 @@ function buchenButtonClicked() {
     for (let inputFieldNumber = 2; inputFieldNumber <= inputRowCount; inputFieldNumber++) {
         theEntry.split($("#sollName" + inputFieldNumber).val(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val(), ($("#habenSum" + inputFieldNumber).val()));
     }
-
+    theEntry.post();
     theEntry.postSubEntries();
 
 
 
 
-    if (validateEntry(theEntry) == false) {
+    //if (validateEntry(theEntry) == false) {
 
-       console.log("Fehler nach der Ausführung");
+    //   console.log("Fehler nach der Ausführung");
 
-    }else{
+    //}else{
 
 
-    theEntry.post();
+    
     history.addEntryToHistory(theEntry);
 
-    //Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
-    //document.getElementById('sollName').value = '';
-    //document.getElementById('sollSum').value = '';
-    //document.getElementById('habenName').value = '';
-    //document.getElementById('habenSum').value = '';
+    ////Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
+    ////document.getElementById('sollName').value = '';
+    ////document.getElementById('sollSum').value = '';
+    ////document.getElementById('habenName').value = '';
+    ////document.getElementById('habenSum').value = '';
 
-    }
+    //}
 
 }
 

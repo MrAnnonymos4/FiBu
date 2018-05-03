@@ -10,7 +10,6 @@ class Draggable {
         let theNewHtmlDraggableElement = document.createElement("div");
         theNewHtmlDraggableElement.classList.add("draggable");
         theNewHtmlDraggableElement.setAttribute("id", this.theDraggableId);
-       // theNewHtmlDraggableElement.style.width = 80 + 'px';
 
         document.getElementById("accountSpace").appendChild(theNewHtmlDraggableElement);
 
@@ -39,11 +38,15 @@ class Draggable {
 
         this.theDraggableHtmlElement.style.webkitTransform =
             this.theDraggableHtmlElement.style.transform =
-            'translate(' + this.theXPostion + 'px, ' + 0 + 'px)';
+            'translate(' + this.theXPostion + 'px, ' + this.theYPosition + 'px)';
 
         // update the position attributes
        this.theDraggableHtmlElement.setAttribute('data-x', this.theXPostion);
        this.theDraggableHtmlElement.setAttribute('data-y', this.theYPostion);
+    }
+
+    getHtmlHeight() {
+        return this.theDraggableHtmlElement.offsetHeight;
     }
 
     

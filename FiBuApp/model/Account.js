@@ -2,7 +2,7 @@ class Account {
     constructor(accountName, accountType) {
         this.theAccountId = accountName;
         this.accountType = accountType;
-        this.theDraggableObject = new Draggable(this.theAccountId + "Draggable", this.calculateDraggableXPosition(), 0);
+        this.theDraggableObject = new Draggable(this.theAccountId + "Draggable", this.calculateDraggableXPosition() + 10, this.calculateDraggableYPosition() + 10);
         this.accountTable = new Table(this.theAccountId, this.theDraggableObject.theDraggableId, this.theDraggableObject);
         
         registeredAccounts.push(this);
@@ -51,12 +51,18 @@ class Account {
             default:
                 theDraggableXPosition = clientSections[2]
         }
-
         return theDraggableXPosition;
     }
 
-    checkIfAccountHasEbkEntry(){
-        
+    //Berechne die Y Position eines Draggables. Summiere dabei die Höhe aller bereits existierenden Draggables die den selben Account Typ beinhalten.
+    calculateDraggableYPosition() {
+        let yPosition = 0;
+        for (let tempCount = 0; tempCount < registeredAccounts.length; tempCount++) {
+            if (registeredAccounts[tempCount].accountType == this.accountType) {
+                yPosition = yPosition + registeredAccounts[tempCount].theDraggableObject.getHtmlHeight();
+            }
+        }
+        return yPosition
     }
 }
 

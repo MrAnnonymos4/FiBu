@@ -28,6 +28,7 @@ limiter {
     width: 100%;
     display: table;
     margin: 0;
+    font-size: 11px;
 }
 
 @media screen and (max-width: 768px) {
@@ -77,8 +78,8 @@ limiter {
 
 .cell {
     display: table-cell;
-    height:20px;
-    width: 65px;
+    height:10px;
+    width: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -185,14 +186,18 @@ limiter {
 
 .sollTableDiv {
     float: left;
- 
+   
 }
 
 .habenTableDiv {
     float: right;
-
+  
 }
 
 .tableSumDiv{
+    font-size: 11px;
+}
+
+.widgetLabel{
 
 }

@@ -1,6 +1,10 @@
-﻿body
-{
+﻿@font-face {
+    font-family: 'Eurostile3';
+    src: url('fonts/Eurostile3.ttf') format('truetype');
+}
 
+body {
+     font-family: Eurostile3;
 }
 
 #nav {
@@ -132,20 +136,7 @@
     -webkit-user-drag: element;
 }
 
-.widgetLabel {
-    height:20px;
-    font-family: Poppins-Regular;
-    font-size: 16px;
-    font-style:italic;
-    text-align: center;
-}
 
 
-.gridster li {
-    list-style: none;
 
-}
 
-.gs_w {
-    
-}
