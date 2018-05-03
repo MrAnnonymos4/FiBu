@@ -42,10 +42,10 @@ function buchenButtonClicked() {
     let subEntries = [];
     let inputRowCount = document.getElementsByClassName("inputRow").length;
 
-    let theEntry = new SplittableEntry($("#sollName" + 1).val(), parseInt($("#sollSum" + 1).val()), $("#habenName" + 1).val(), parseInt($("#habenSum" + 1).val()));
+    let theEntry = new SplittableEntry($("#sollName" + 1).val().trim().toUpperCase(), parseInt($("#sollSum" + 1).val()), $("#habenName" + 1).val().trim().toUpperCase(), parseInt($("#habenSum" + 1).val()));
 
     for (let inputFieldNumber = 2; inputFieldNumber <= inputRowCount; inputFieldNumber++) {
-        theEntry.split($("#sollName" + inputFieldNumber).val(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val(), ($("#habenSum" + inputFieldNumber).val()));
+        theEntry.split($("#sollName" + inputFieldNumber).val().trim().toUpperCase(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val().trim().toUpperCase(), ($("#habenSum" + inputFieldNumber).val()));
     }
     theEntry.post();
     theEntry.postSubEntries();

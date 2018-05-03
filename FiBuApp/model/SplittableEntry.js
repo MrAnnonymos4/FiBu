@@ -1,9 +1,9 @@
 class SplittableEntry {
     constructor(sollName, sollSum, habenName, habenSum) {
         this.id = history.getEntryCount();
-        this.sollName = sollName.toUpperCase();
+        this.sollName = sollName;
         this.sollSum = sollSum;
-        this.habenName = habenName.toUpperCase();
+        this.habenName = habenName;
         this.habenSum = habenSum;
         this.subEntries = [];
     }
