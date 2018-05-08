@@ -6,6 +6,7 @@ let newButtonFlag = 0;
 let closingButtonFlag = 0;
 let clientSections = [];
 let possibleAccounts = ["Grundstücke", "Maschinen", "Fahrzeuge", "BGA", "Im. Vermögensgegenstände", "Finanzanlagen", "Langfristige Verbindlichkeiten", "EK", "Rückstellungen", "Kasse", "Bank", "Rohstoffe", "Hilfs- Betriebsstoffe", "Unfertige Erzeugnisse"];
+let status = 0; // 0 = Eröffnungsbuchungen, 1 = Laufende Buchungen, 2 = Abschluss Buchungen
 
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
@@ -157,73 +158,80 @@ function journalButtonClicked(){
     }
 }
 
-function newButtonClicked(){
-
-    if(newButtonFlag == 0){
-
-    let table = document.getElementById("newTable");
-
-    let row = table.insertRow(0);
-
-    let sollCell = row.insertCell(0);
-
-    sollCell.innerHTML= "Konto anlegen:";
-
-    row = table.insertRow(1);
-
-    sollCell = row.insertCell(0);
-    sollSumCell = row.insertCell(1);
-
-    sollCell.innerHTML = "<input type='text' id='activeTable'>";
-    sollSumCell.innerHTML = "<button id='newActiveAccount'type='button' onclick='newActivAccountButtonClicked()' class='btn btn-default'>Aktiv</button>";
-
-    row = table.insertRow(2);
-
-    sollCell = row.insertCell(0);
-    sollSumCell = row.insertCell(1);
-
-    sollCell.innerHTML = "<input type='text' id='passivTable'>";
-    sollSumCell.innerHTML = "<button id='newPassivAccount'type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>";
-
-    row = table.insertRow(3);
-
-    sollCell = row.insertCell(0);
-    sollSumCell = row.insertCell(1);
-
-    sollCell.innerHTML = "<input type='text' id='aufwandTable'>";
-    sollSumCell.innerHTML = "<button id='newAufwandAccount'type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>";
-
-    row = table.insertRow(4);
-
-    sollCell = row.insertCell(0);
-    sollSumCell = row.insertCell(1);
-
-    sollCell.innerHTML = "<input type='text' id='ertragTable'>";
-    sollSumCell.innerHTML = "<button id='newErtragAccount'type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>";
-
-    row = table.insertRow(5);
-
-    sollCell = row.insertCell(0);
-
-    sollCell.innerHTML= "Konto löschen:";
-
-    row = table.insertRow(6);
-
-    sollCell = row.insertCell(0);
-    sollSumCell = row.insertCell(1);
-
-    sollCell.innerHTML = "<input type='text' id='deleteTable'>";
-    sollSumCell.innerHTML = "<button id='newDeleteAccount'type='button' class='btn btn-default'>Löschen</button>";
-
-    newButtonFlag = 1;
-}else{
-
-    for(let i = 0; i <= 6; i++){
-        document.getElementById("newTable").deleteRow(0);
+function newButtonClicked() {
+    if (document.getElementById("createNewAccountWindow").style.visibility == "hidden") {
+        document.getElementById("createNewAccountWindow").style.visibility = "visible";
+    } else {
+        document.getElementById("createNewAccountWindow").style.visibility = "hidden";
     }
 
-    newButtonFlag = 0;
-}
+
+//    if(newButtonFlag == 0){
+
+//    let table = document.getElementById("newTable");
+
+//    let row = table.insertRow(0);
+
+//    let sollCell = row.insertCell(0);
+
+//    sollCell.innerHTML= "Konto anlegen:";
+
+//    row = table.insertRow(1);
+
+//    sollCell = row.insertCell(0);
+//    sollSumCell = row.insertCell(1);
+
+//    sollCell.innerHTML = "<input type='text' id='activeTable'>";
+//    sollSumCell.innerHTML = "<button id='newActiveAccount'type='button' onclick='newActivAccountButtonClicked()' class='btn btn-default'>Aktiv</button>";
+
+//    row = table.insertRow(2);
+
+//    sollCell = row.insertCell(0);
+//    sollSumCell = row.insertCell(1);
+
+//    sollCell.innerHTML = "<input type='text' id='passivTable'>";
+//    sollSumCell.innerHTML = "<button id='newPassivAccount'type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>";
+
+//    row = table.insertRow(3);
+
+//    sollCell = row.insertCell(0);
+//    sollSumCell = row.insertCell(1);
+
+//    sollCell.innerHTML = "<input type='text' id='aufwandTable'>";
+//    sollSumCell.innerHTML = "<button id='newAufwandAccount'type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>";
+
+//    row = table.insertRow(4);
+
+//    sollCell = row.insertCell(0);
+//    sollSumCell = row.insertCell(1);
+
+//    sollCell.innerHTML = "<input type='text' id='ertragTable'>";
+//    sollSumCell.innerHTML = "<button id='newErtragAccount'type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>";
+
+//    row = table.insertRow(5);
+
+//    sollCell = row.insertCell(0);
+
+//    sollCell.innerHTML= "Konto löschen:";
+
+//    row = table.insertRow(6);
+
+//    sollCell = row.insertCell(0);
+//    sollSumCell = row.insertCell(1);
+
+//    sollCell.innerHTML = "<input type='text' id='deleteTable'>";
+//    sollSumCell.innerHTML = "<button id='newDeleteAccount'type='button' class='btn btn-default'>Löschen</button>";
+
+//    newButtonFlag = 1;
+
+//}else{
+
+//    for(let i = 0; i <= 6; i++){
+//        document.getElementById("newTable").deleteRow(0);
+//    }
+
+//    newButtonFlag = 0;
+//}
 
 }
 

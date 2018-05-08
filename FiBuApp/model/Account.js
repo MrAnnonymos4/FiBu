@@ -4,29 +4,29 @@ class Account {
         this.accountType = accountType;
         this.theDraggableObject = new Draggable(this.theAccountId + "Draggable", this.calculateDraggableXPosition() + 10, this.calculateDraggableYPosition() + 10);
         this.accountTable = new Table(this.theAccountId, this.theDraggableObject.theDraggableId, this.theDraggableObject);
+        this.theAccountHtmlData;
         
         registeredAccounts.push(this);
 
     }
 
-    addEntry(anEntry, isActive) {
-        if (isActive) {
-            this.addSoll(anEntry);
-        } else if (!isActive) {
-            this.addHaben(anEntry);
-        } else {
-            throw "Illegal Entry";
-        }
-    }
-
     addSollEntry(anEntry) {
         this.accountTable.addSollData(anEntry.sollName, anEntry.sollSum);
+        
     }
 
     addHabenEntry(anEntry) {
         this.accountTable.addHabenData(anEntry.habenName, anEntry.habenSum);
     }
 
+    saveHtmlData() {
+        this.theAccountHtmlData = $('#' + this.theDraggableObject.theDraggableId);
+        return this.theAccountHtmlData;
+    }
+
+    loadHtmlData() {
+        document.getElementById("accountSpace").appendChild(this.theAccountHtmlData);
+    }
 
     //find the draggable initial X position by account type
     calculateDraggableXPosition() {

@@ -229,6 +229,7 @@
 /* support bootstrap 2 */
 .fixed-table-body thead th .th-inner {
     box-sizing: border-box;
+    width: 38px;
 }
 
 .table th, .table td {

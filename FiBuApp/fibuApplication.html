@@ -83,9 +83,119 @@
 
     <!-- FibuApplication -->
     <div id="fibuApplication">
-       <div id="accountSpace" class="accountSpace">
+        <div id="movableSpace">
+            <div id="accountSpace" class="accountSpace">
 
-       </div>
+
+            </div>
+            <!-- Userinput: Buchungsfenster -->
+            <div id="userInput" class="draggable">
+                <table>
+                    <tr>
+
+                        <td>
+                            <table id="closing">
+                                <tr></tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table class="table" id="inputMask">
+                                <tbody>
+                                    <tr style="height: 60px;">
+                                        <td scope="col">Nr.</td>
+                                        <td scope="col">Sollbuchung</td>
+                                        <td scope="col">Betrag</td>
+                                        <td scope="col">Habenbuchung</td>
+                                        <td scope="col">Betrag</td>
+                                    </tr>
+                                    <tr style="height: 60px;" class="inputRow">
+                                        <td scope="row">1</td>
+                                        <td><input type="text" id="sollName1"></td>
+                                        <td><input type="number" id="sollSum1"></td>
+                                        <td><input type="text" id="habenName1"></td>
+                                        <td><input type="number" id="habenSum1"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="table">
+                                <tbody>
+                                    <tr style="height: 60px;">
+                                        <td><button type="button" class="btn btn-default" onClick="newButtonClicked()">Neu</button></td>
+                                        <td><button type="button" class="btn btn-default" onClick="closingButtonClicked()">Abschluss</button></td>
+                                        <td><button type="button" class="btn btn-default">Protokoll</button></td>
+                                    </tr>
+                                    <tr style="height: 60px;">
+                                        <td><button type="button" class="btn btn-default" onclick="buchenButtonClicked()">Buchen</button></td>
+                                        <td><button type="button" class="btn btn-default" onclick="splitButtonClicked()">Split</button></td>
+                                        <td><button type="button" class="btn btn-default" onClick="journalButtonClicked()">Journal</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Userinput: Neues Konto anlegen -->
+            <div id="createNewAccountWindow" class="draggable" style="visibility:hidden">
+                <table id="createNewAccountTable">
+                    <tr>
+                        <td>
+                            Konto anlegen:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' id='activeTable'>
+                        </td>
+                        <td>
+                            <button id='newActiveAccount' type='button' onclick='newActivAccountButtonClicked()' class='btn btn-default'>Aktiv</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' id='passivTable'>
+                        </td>
+                        <td>
+                            <button id='newPassivAccount' type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' id='aufwandTable'>
+                        </td>
+                        <td>
+                            <button id='newAufwandAccount' type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' id='ertragTable'>
+                        </td>
+                        <td>
+                            <button id='newErtragAccount' type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Konto löschen:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' id='deleteTable'>
+                        </td>
+                        <td>
+                            <button id='newDeleteAccount' type='button' class='btn btn-default'>Löschen</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
    
 
@@ -99,61 +209,10 @@
         </table>
     </div>
 
-    <!-- Userinput -->
-    <div id="userInput">
-        <table>
-            <tr>
-                <td>
-                    <table id="newTable">
-                        <tr></tr>
-                    </table>
-                </td>
-                <td>
-                    <table id="closing">
-                        <tr></tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table class="table" id="inputMask">
-                        <tbody>
-                            <tr style="height: 60px;">
-                                <td scope="col">Nr.</td>
-                                <td scope="col">Sollbuchung</td>
-                                <td scope="col">Betrag</td>
-                                <td scope="col">Habenbuchung</td>
-                                <td scope="col">Betrag</td>
-                            </tr>
-                            <tr style="height: 60px;" class="inputRow">
-                                <td scope="row">1</td>
-                                <td><input type="text" id="sollName1"></td>
-                                <td><input type="number" id="sollSum1"></td>
-                                <td><input type="text" id="habenName1"></td>
-                                <td><input type="number" id="habenSum1"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-                <td>
-                    <table class="table">
-                        <tbody>
-                            <tr style="height: 60px;">
-                                <td><button type="button" class="btn btn-default" onClick="newButtonClicked()">Neu</button></td>
-                                <td><button type="button" class="btn btn-default" onClick="closingButtonClicked()">Abschluss</button></td>
-                                <td><button type="button" class="btn btn-default">Protokoll</button></td>
-                            </tr>
-                            <tr style="height: 60px;">
-                                <td><button type="button" class="btn btn-default" onclick="buchenButtonClicked()">Buchen</button></td>
-                                <td><button type="button" class="btn btn-default" onclick="splitButtonClicked()">Split</button></td>
-                                <td><button type="button" class="btn btn-default" onClick="journalButtonClicked()">Journal</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </div>
+
+
+
+    
 
 
 
