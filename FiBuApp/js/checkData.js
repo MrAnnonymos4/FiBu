@@ -171,7 +171,7 @@ function checkAccount(theEntry){
     let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
 
     if(sollAccount == null){
-        console.log("Fehler. Konto muss existieren.")
+        console.log("Fehler. Soll Konto muss existieren.")
         return false;
     }else if(habenAccount == null){
         console.log("Fehler. Haben Konto muss existieren.")
@@ -181,6 +181,22 @@ function checkAccount(theEntry){
 }
 
 function checkForIncExpAcc(theEntry){
+
+    //Buchung darf nicht an Aufwands / Ertragskonto gehen
+    for(i = 0;  i <= registeredAccounts.length; i++){
+        if(theEntry.sollName == registeredAccounts[i].theAccountId){
+            if(registeredAccounts[i].accountType == "ertrag" || registeredAccounts[i].accountType == "aufwand"){
+                console.log("Fehler. Konto darf kein Aufwands-/ Ertragskonto sein.")
+                return false;
+            }
+        } else if (theEntry.habenName == registeredAccounts[i].theAccountId){
+            if(registeredAccounts[i].accountType == "ertrag" || registeredAccounts[i].accountType == "aufwand"){
+                console.log("Fehler. Konto darf kein Aufwands-/ Ertragskonto sein.")
+                return false;
+            }
+        }
+    }
+
 
 }
 
@@ -268,7 +284,17 @@ function checkSbkWare(theEntry){
 }
 
 function checkAufwandBestand(theEntry){
-    //Prüfen ob die Konten Aufwands oder Bestandskonten sind
+    //Prüfen ob die Konten Aufwands oder Bestandskonten 
+    if(theEntry.sollName == "WARENAUFWAND" && theEntry.habenName == "WARENBESTAND" || theEntry.habenName == "WARENAUFWAND" && theEntry.sollName == "WARENAUFWAND"){
+        
+        let sollAccount = registeredAccounts.find(account => account.theAccountId === theEntry.sollName);
+        let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
+
+        if(sollAccount == null ||habenAccount == null){
+            console.log("Fehler in einem der beiden Konten.");
+            return false;
+        }
+    }
     //Wenn Konten schon vorhanden sind Buchen
     //Wenn nicht Hinweis (Fehlendes Konto)
 }

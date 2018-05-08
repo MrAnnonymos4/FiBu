@@ -262,6 +262,35 @@ function newButtonClicked(){
 
         checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
 
+        if(closingButtonFlag == 0){
+
+            //Summe Soll EBK == Summe Haben EBK
+
+            let getEBK = registeredAccounts.find(account => account.theAccountId === "EBK");
+
+            if(getEBK.habenSum != getEBK.sollSum){
+                
+                console.log("Fehler, das EBK muss auf Soll und haben gleich sein")
+                return false;
+            }
+
+            closingButtonFlag = 1;
+
+        }else if(closingButtonFlag == 1){
+
+            let check = confirm("Sind die vorbereitenden Abschlussbuchungen durchgeführt?");
+            if(check == false){
+                return false;
+            }
+
+            //GUV und SBK anlegen
+            closingButtonFlag = 2;
+
+            //Split Buchungen nicht möglich
+
+        }
+
+
         if (closingButtonFlag == 0) {
             let table = document.getElementById("closing");
 
@@ -288,7 +317,7 @@ function newButtonClicked(){
             closingText.innerHTML = "Inventurbestand einbuchen und erneut Abschluss drücken:";
             checkButton.innerHTML = "<button id='abschluss' type='button' class='btn btn-default'>Ja</button>";
 
-            closingButtonFlag = 1;
+            
 
         } else {
 
