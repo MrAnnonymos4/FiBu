@@ -10,7 +10,17 @@ let status = 0; // 0 = Eröffnungsbuchungen, 1 = Laufende Buchungen, 2 = Abschlu
 
 document.addEventListener("DOMContentLoaded", function () {
     initialize();
+    setEventListeners();
 });
+
+// Setzte EventListeners für Buttons
+function setEventListeners() {
+    document.getElementById("newAktivAccountButton").addEventListener("click", newAktivAccountButtonClicked);
+    document.getElementById("newPassivAccountButton").addEventListener("click", newPassivAccountButtonClicked);
+    document.getElementById("newErtragAccountButton").addEventListener("click", newErtragAccountButtonClicked);
+    document.getElementById("newAufwandAccountButton").addEventListener("click", newAufwandAccountButtonClicked);
+    document.getElementById("deleteAccountButton").addEventListener("click", deleteAccountButtonClicked);
+}
 
 
 function initialize() {
@@ -164,130 +174,68 @@ function newButtonClicked() {
     } else {
         document.getElementById("createNewAccountWindow").style.visibility = "hidden";
     }
-
-
-//    if(newButtonFlag == 0){
-
-//    let table = document.getElementById("newTable");
-
-//    let row = table.insertRow(0);
-
-//    let sollCell = row.insertCell(0);
-
-//    sollCell.innerHTML= "Konto anlegen:";
-
-//    row = table.insertRow(1);
-
-//    sollCell = row.insertCell(0);
-//    sollSumCell = row.insertCell(1);
-
-//    sollCell.innerHTML = "<input type='text' id='activeTable'>";
-//    sollSumCell.innerHTML = "<button id='newActiveAccount'type='button' onclick='newActivAccountButtonClicked()' class='btn btn-default'>Aktiv</button>";
-
-//    row = table.insertRow(2);
-
-//    sollCell = row.insertCell(0);
-//    sollSumCell = row.insertCell(1);
-
-//    sollCell.innerHTML = "<input type='text' id='passivTable'>";
-//    sollSumCell.innerHTML = "<button id='newPassivAccount'type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>";
-
-//    row = table.insertRow(3);
-
-//    sollCell = row.insertCell(0);
-//    sollSumCell = row.insertCell(1);
-
-//    sollCell.innerHTML = "<input type='text' id='aufwandTable'>";
-//    sollSumCell.innerHTML = "<button id='newAufwandAccount'type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>";
-
-//    row = table.insertRow(4);
-
-//    sollCell = row.insertCell(0);
-//    sollSumCell = row.insertCell(1);
-
-//    sollCell.innerHTML = "<input type='text' id='ertragTable'>";
-//    sollSumCell.innerHTML = "<button id='newErtragAccount'type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>";
-
-//    row = table.insertRow(5);
-
-//    sollCell = row.insertCell(0);
-
-//    sollCell.innerHTML= "Konto löschen:";
-
-//    row = table.insertRow(6);
-
-//    sollCell = row.insertCell(0);
-//    sollSumCell = row.insertCell(1);
-
-//    sollCell.innerHTML = "<input type='text' id='deleteTable'>";
-//    sollSumCell.innerHTML = "<button id='newDeleteAccount'type='button' class='btn btn-default'>Löschen</button>";
-
-//    newButtonFlag = 1;
-
-//}else{
-
-//    for(let i = 0; i <= 6; i++){
-//        document.getElementById("newTable").deleteRow(0);
-//    }
-
-//    newButtonFlag = 0;
-//}
-
 }
 
-    function newAktivAccountButtonClicked() {
-    let newAccountName = document.getElementById("newActivAccount").val();
+function newAktivAccountButtonClicked() {
+    let newAccountName = document.getElementById("newAktivAccountName").value;
     if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
         new Account(newAccountName, "aktiv");
     }
+}
 
-    function newPassivAccountButtonClicked() {
-        let newAccountName = document.getElementById("newPassivAccount").val();
-        if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
-            new Account(newAccountName, "passiv");
-        }
+function newPassivAccountButtonClicked() {
+    let newAccountName = document.getElementById("newPassivAccountName").value;
+    if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+        new Account(newAccountName, "passiv");
     }
+}
 
-    function newAufwandAccountButtonClicked() {
-        let newAccountName = document.getElementById("newAufwandAccount").val();
-        if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
-            new Account(newAccountName, "aufwand");
-        }
+function newAufwandAccountButtonClicked() {
+    let newAccountName = document.getElementById("newAufwandAccountName").value;
+    if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+        new Account(newAccountName, "aufwand");
     }
+}
 
-    function newErtragAccountButtonClicked() {
-        let newAccountName = document.getElementById("newErtragAccount").val();
-        if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
-            new Account(newAccountName, "ertrag");
-        }
+function newErtragAccountButtonClicked() {
+    let newAccountName = document.getElementById("newErtragAccountName").value;
+    if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
+        new Account(newAccountName, "ertrag");
     }
+}
 
-    function deleteAccountButtonClicked() {
-        //Todo
+function deleteAccountButtonClicked() {
+    let newAccountName = document.getElementById("deleteAccountName").value;
+    let accountToDelete = registeredAccounts.find(account => account.theAccountId === newAccountName);
+    if (accountToDelete != null) {
+        accountToDelete.deleteAccount();
+    } else {
+        document.getElementById("deleteAccountName").value = "Account existiert nicht";
     }
+}
 
     function closingButtonClicked() {
 
         checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
 
-        if(closingButtonFlag == 0){
+        if (closingButtonFlag == 0) {
 
             //Summe Soll EBK == Summe Haben EBK
 
             let getEBK = registeredAccounts.find(account => account.theAccountId === "EBK");
 
-            if(getEBK.habenSum != getEBK.sollSum){
-                
+            if (getEBK.habenSum != getEBK.sollSum) {
+
                 console.log("Fehler, das EBK muss auf Soll und haben gleich sein")
                 return false;
             }
 
             closingButtonFlag = 1;
 
-        }else if(closingButtonFlag == 1){
+        } else if (closingButtonFlag == 1) {
 
             let check = confirm("Sind die vorbereitenden Abschlussbuchungen durchgeführt?");
-            if(check == false){
+            if (check == false) {
                 return false;
             }
 
@@ -325,7 +273,7 @@ function newButtonClicked() {
             closingText.innerHTML = "Inventurbestand einbuchen und erneut Abschluss drücken:";
             checkButton.innerHTML = "<button id='abschluss' type='button' class='btn btn-default'>Ja</button>";
 
-            
+
 
         } else {
 
@@ -336,4 +284,4 @@ function newButtonClicked() {
             closingButtonFlag = 0;
         }
     }
-}
+

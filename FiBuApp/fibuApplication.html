@@ -26,14 +26,13 @@
     <script src="js/bootstrap-table.js"></script>
 
     <script src="js/list.js"></script>
- 
-    <script src="model/Entry.js"></script>        
+
+    <script src="model/Entry.js"></script>
 
     <script src="model/Account.js"></script>
     <script src="model/History.js"></script>
     <script src="model/Table.js"></script>
-    <script src="model/SollTable.js"></script>
-    <script src="model/HabenTable.js"></script>
+
     <script src="model/SplittableEntry.js"></script>
     <script src="js/draggable.js"></script>
     <script src="model/Draggable.js"></script>
@@ -150,34 +149,34 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type='text' id='activeTable'>
+                            <input type='text' id='newAktivAccountName'>
                         </td>
                         <td>
-                            <button id='newActiveAccount' type='button' onclick='newActivAccountButtonClicked()' class='btn btn-default'>Aktiv</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type='text' id='passivTable'>
-                        </td>
-                        <td>
-                            <button id='newPassivAccount' type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>
+                            <button id='newAktivAccountButton' type='button'  class='btn btn-default'>Aktiv</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type='text' id='aufwandTable'>
+                            <input type='text' id='newPassivAccountName'>
                         </td>
                         <td>
-                            <button id='newAufwandAccount' type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>
+                            <button id='newPassivAccountButton' type='button' onclick='newPassivAccountButtonClicked()' class='btn btn-default'>Passiv</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type='text' id='ertragTable'>
+                            <input type='text' id='newAufwandAccountName'>
                         </td>
                         <td>
-                            <button id='newErtragAccount' type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>
+                            <button id='newAufwandAccountButton' type='button' onclick='newAufwandAccountButtonClicked()' class='btn btn-default'>Aufwand</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type='text' id='newErtragAccountName'>
+                        </td>
+                        <td>
+                            <button id='newErtragAccountButton' type='button' onclick='newErtragAccountButtonClicked()' class='btn btn-default'>Ertrag</button>
                         </td>
                     </tr>
                     <tr>
@@ -187,10 +186,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type='text' id='deleteTable'>
+                            <input type='text' id='deleteAccountName'>
                         </td>
                         <td>
-                            <button id='newDeleteAccount' type='button' class='btn btn-default'>Löschen</button>
+                            <button id='deleteAccountButton' type='button' class='btn btn-default'>Löschen</button>
                         </td>
                     </tr>
                 </table>

@@ -1,97 +1,110 @@
-class Table {
-    constructor(accountId, draggableId, draggableElement) {
+class Table{
+    constructor(accountId, accountType) {
         this.theTableName = accountId + "Table";
-        this.theDraggableId = draggableId;
-        this.theDraggableHtmlElement = document.getElementById(this.theDraggableId);
-        this.theDraggableElement = draggableElement;
+        this.theDraggableObject = new Draggable(this.theTableName + "Draggable");
+        this.theDraggableHtmlElement = document.getElementById(this.theTableName + "Draggable");
         this.theTableObject;
         this.theTableHtmlElement;
         this.theRowCount;
 
-        let theSollTableObject;
-        let theHabenTableObject;
-        let theSollSumDivHtmlElement;
-        let theHabenSumDivHtmlElement;
+        this.tableColumns = [
+            {
+                class: "cell",
+                field: "sollName",
+                title: "S"
+            },
+            {
+                class: "cell",
+                field: "sollEntries",
+                title: "Soll"
+            },
+            {
+                class: "cell",
+                field: "habenName",
+                title: "H"
+            },
+            {
+                class: "cell",
+                field: "habenEntries",
+                title: "Haben"
+            }
+        ];
 
-        
+        this.tableRows = [];
+
         //Tabellen Überschrift Div erstellen
         let theDescriptionElement = document.createElement("div");
         theDescriptionElement.classList.add("widgetLabel");
         theDescriptionElement.innerHTML = this.theTableName.replace("Table", "");
         this.theDraggableHtmlElement.appendChild(theDescriptionElement);
 
-        //Soll Tabellen Div erstellen
-        let theSollTableDiv = document.createElement("div");
-        theSollTableDiv.setAttribute("id", "sollDiv" + this.theTableName);
-        theSollTableDiv.classList.add("sollTableDiv");
-        this.theDraggableHtmlElement.appendChild(theSollTableDiv);
+        //HTML Tabellenelement erstellen
+        let theNewTableElement = document.createElement("table");
+        theNewTableElement.setAttribute("id", this.theTableName);
 
-        //Haben Tabellen Div erstellen
-        let theHabenTableDiv = document.createElement("div");
-        theHabenTableDiv.setAttribute("id", "habenDiv" + this.theTableName);
-        theHabenTableDiv.classList.add("habenTableDiv");
-        this.theDraggableHtmlElement.appendChild(theHabenTableDiv);
+        //HTML Tabellenelement in Haben Tabellen Div einfügen
+        this.theDraggableHtmlElement.appendChild(theNewTableElement);
 
-        //Soll Tabelle erstellen
-        this.theSollTableObject = new SollTable(this.theTableName, theSollTableDiv);
+        //Erstellte Tabelle als JQuerry Objekt finden und als Bootstrap Table initialisieren
+        this.theTableHtmlElement = $('#' + this.theTableName);
+        this.theTableHtmlElement.bootstrapTable({ columns: this.tableColumns });
 
-        //Haben Tabelle erstellen
-        this.theHabenTableObject = new HabenTable(this.theTableName, theHabenTableDiv);
-
-        //Summen Div erstellen, Summen Div für Haben und Soll Tabelle anhängen
-        let theSumDivSpace = document.createElement("div");
-
-        this.theHabenSumDivHtmlElement = document.createElement("div");
-        this.theHabenSumDivHtmlElement.classList.add("tableSumDiv");
-        this.theHabenSumDivHtmlElement.setAttribute("style", "float: right");
-        theSumDivSpace.appendChild(this.theHabenSumDivHtmlElement);
-
-        this.theSollSumDivHtmlElement = document.createElement("div");
-        this.theSollSumDivHtmlElement.classList.add("tableSumDiv");
-        this.theSollSumDivHtmlElement.setAttribute("style", "float: left");
-        theSumDivSpace.appendChild(this.theSollSumDivHtmlElement);
-
-        this.theDraggableHtmlElement.appendChild(theSumDivSpace);
     }
 
-    //Neue Daten {sollCount, sollEntries, habenCount, habenEntries} der Tabelle hinzufügen.
-    appendData(theNewData) {
-        this.theTableObject.bootstrapTable('append', theNewData);
-        this.theDraggableElement.resize(this.getOffsetHeight + 20); //Resize the widget according to new table size
-    }
 
-    //Neue Soll Daten der Tabelle hinzufügen. Bei Haben Tabelle eine leere Zeile einfügen. Dann Summe in entsprechenden Summen Div aktualisieren.
-    addSollData(sollName, sollSum) {
-        this.theSollTableObject.appendSollData(sollName, sollSum);
-		if (this.theSollTableObject.theSollRows.length > this.theHabenTableObject.theHabenRows.length){
-			this.theHabenTableObject.appendBlankRow();
+
+    appendSollData(sollNameData, sollSum) {
+        if (this.getLastNotEmptySollRow() >= this.getLastNotEmptyHabenRow()) {
+            this.tableRows.push({ sollName: sollNameData, sollEntries: sollSum, habenName: "", habenEntries: "" });
         }
-        this.refreshSollSum();
+        //Wenn Habenseite auf diesem Level bereits Einträge hat, dann aktualisiere den entsprechenden Eintrag indem Soll Daten dazugeschrieben werden
+        else {
+            let rowToBeManipulated = this.getLastNotEmptySollRow();
+            this.tableRows[rowToBeManipulated].sollName = sollNameData;
+            this.tableRows[rowToBeManipulated].sollEntries = sollSum;
+        }
+
+        this.updateTableDataset();
+        //this.theDraggableObject.resize(this.getOffsetHeight + 20); 
     }
 
-    //Neue Haben Daten der Tabelle hinzufügen. Bei Haben Tabelle eine leere Zeile einfügen. Dann Summe in entsprechenden Summen Div aktualisieren.
-    addHabenData(habenName, habenSum) {
-        this.theHabenTableObject.appendHabenData(habenName, habenSum);
-		if (this.theHabenTableObject.theHabenRows.length > this.theSollTableObject.theSollRows.length){
-			this.theSollTableObject.appendBlankRow();
+    appendHabenData(habenNameData, habenSum) {
+        if (this.getLastNotEmptyHabenRow() >= this.getLastNotEmptySollRow()) {
+            this.tableRows.push({ sollName: "", sollEntries: "", habenName: habenNameData, habenEntries: habenSum });
         }
-        this.refreshHabenSum();
+        //Wenn Habenseite auf diesem Level bereits Einträge hat, dann aktualisiere den entsprechenden Eintrag indem Soll Daten dazugeschrieben werden
+        else {
+            let rowToBeManipulated = this.getLastNotEmptyHabenRow();
+            this.tableRows[rowToBeManipulated].habenName = habenNameData;
+            this.tableRows[rowToBeManipulated].habenEntries = habenSum; 
+        }
+
+        this.updateTableDataset();
+        //this.theDraggableObject.resize(this.getOffsetHeight + 20);
     }
 
-    //Aktualisiert die im Haben Summen Div angezeigt Summe aller entsprechender Buchungen.
-    refreshHabenSum() {
-        let habenTableSum = this.theHabenTableObject.calculateEntriesColumnSum();
-        if (habenTableSum != 0) {
-            this.theHabenSumDivHtmlElement.innerHTML = "Summe: " + habenTableSum;
+    getLastNotEmptySollRow() {
+        let tempCount = this.tableRows.length - 1;
+        for (tempCount; tempCount >= 0; tempCount--) {
+            if (this.tableRows[tempCount].sollName != "") {
+                return tempCount+1;
+            }
         }
+        return 0;
     }
 
-    //Aktualisiert die im Soll Summen Div angezeigt Summe aller entsprechender Buchungen.
-    refreshSollSum() {
-        let sollTableSum = this.theSollTableObject.calculateEntriesColumnSum();
-        if (sollTableSum != 0) {
-            this.theSollSumDivHtmlElement.innerHTML = "Summe: " + sollTableSum;
+    getLastNotEmptyHabenRow() {
+        let tempCount = this.tableRows.length - 1;
+        for (tempCount; tempCount >= 0; tempCount--) {
+            if (this.tableRows[tempCount].habenName != "") {
+                return tempCount+1;
+            }
         }
+        return 0;
+    }
+
+    updateTableDataset() {
+        this.theTableHtmlElement.bootstrapTable('load', this.tableRows);
     }
 
 
@@ -103,7 +116,7 @@ class Table {
         return this.theTableHtmlElement.getOffsetWidth
     }
 
-
-    
- 
+    setTablePosition(accountType) {
+        this.theDraggableObject.findPositionByAccountType(accountType);
+    }
 }
