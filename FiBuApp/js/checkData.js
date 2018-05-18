@@ -75,6 +75,16 @@ function validateEntry(theEntry){
     */
 } 
 
+function validateEBKSumForClosing() {
+    let ebkAccount = registeredAccounts[0];
+    let ebkSollSum = ebkAccount.getSollSum();
+    let ebkHabenSum = ebkAccount.getHabenSum();
+    if (ebkSollSum != 0 && ebkHabenSum != 0 && ebkSollSum == ebkHabenSum) {
+        return true;
+    } 
+    return false;
+}
+
 function checkSum(theEntry){
 
 //Eintrag ins Protokoll bei Fehler

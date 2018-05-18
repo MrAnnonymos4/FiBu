@@ -12,12 +12,20 @@ class Account {
 
 
     addSollEntry(anEntry) {
-        this.accountTable.appendSollData(anEntry.sollName, anEntry.sollSum);
+        this.accountTable.appendSollData(anEntry.habenName, anEntry.sollSum);
         
     }
 
     addHabenEntry(anEntry) {
-        this.accountTable.appendHabenData(anEntry.habenName, anEntry.habenSum);
+        this.accountTable.appendHabenData(anEntry.sollName, anEntry.habenSum);
+    }
+
+    getSollSum() {
+        return this.accountTable.calculateSollSum();
+    }
+
+    getHabenSum() {
+        return this.accountTable.calculateHabenSum();
     }
 
     //saveHtmlData() {

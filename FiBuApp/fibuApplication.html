@@ -37,6 +37,8 @@
     <script src="js/draggable.js"></script>
     <script src="model/Draggable.js"></script>
     <script src="js/fibuApplication.js"></script>
+    <script src="js/buttonEvents.js"></script>
+    <script src="js/accountingFunctions.js"></script>
     <script src="js/checkData.js"></script>
 
 
@@ -124,7 +126,7 @@
                                 <tbody>
                                     <tr style="height: 60px;">
                                         <td><button type="button" class="btn btn-default" onClick="newButtonClicked()">Neu</button></td>
-                                        <td><button type="button" class="btn btn-default" onClick="closingButtonClicked()">Abschluss</button></td>
+                                        <td><button type="button" class="btn btn-default" id="closingButton">Abschluss</button></td>
                                         <td><button type="button" class="btn btn-default">Protokoll</button></td>
                                     </tr>
                                     <tr style="height: 60px;">
@@ -152,7 +154,7 @@
                             <input type='text' id='newAktivAccountName'>
                         </td>
                         <td>
-                            <button id='newAktivAccountButton' type='button'  class='btn btn-default'>Aktiv</button>
+                            <button id='newAktivAccountButton' type='button' draggable="false"  class='btn btn-default'>Aktiv</button>
                         </td>
                     </tr>
                     <tr>

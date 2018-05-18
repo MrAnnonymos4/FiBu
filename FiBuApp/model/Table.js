@@ -49,6 +49,21 @@ class Table{
         this.theTableHtmlElement = $('#' + this.theTableName);
         this.theTableHtmlElement.bootstrapTable({ columns: this.tableColumns });
 
+        //Summen Divs erstellen
+        this.sollSumHtmlElement = document.createElement("div");
+        this.sollSumHtmlElement.style.width = this.theDraggableHtmlElement.offsetWidth / 2 + "px";
+        this.sollSumHtmlElement.style.cssFloat = "left";
+        this.sollSumHtmlElement.style.textAlign = "right";
+
+        this.habenSumHtmlElement = document.createElement("div");
+        this.habenSumHtmlElement.style.width = this.theDraggableHtmlElement.offsetWidth / 2 + "px";
+        this.habenSumHtmlElement.style.cssFloat = "right";
+        this.habenSumHtmlElement.style.textAlign = "right";
+
+        this.theDraggableHtmlElement.appendChild(this.sollSumHtmlElement);
+        this.theDraggableHtmlElement.appendChild(this.habenSumHtmlElement);
+        
+
     }
 
 
@@ -64,7 +79,8 @@ class Table{
             this.tableRows[rowToBeManipulated].sollEntries = sollSum;
         }
 
-        this.updateTableDataset();
+        this.updateTableDataset(this.tableRows);
+        this.updateSollSum();
         //this.theDraggableObject.resize(this.getOffsetHeight + 20); 
     }
 
@@ -79,8 +95,17 @@ class Table{
             this.tableRows[rowToBeManipulated].habenEntries = habenSum; 
         }
 
-        this.updateTableDataset();
+        this.updateTableDataset(this.tableRows);
+        this.updateHabenSum();
         //this.theDraggableObject.resize(this.getOffsetHeight + 20);
+    }
+
+    updateSollSum() {
+        this.sollSumHtmlElement.innerHTML = "\u2140"+ this.calculateSollSum();
+    }
+
+    updateHabenSum() {
+        this.habenSumHtmlElement.innerHTML = "\u2140" + this.calculateHabenSum();
     }
 
     getLastNotEmptySollRow() {
@@ -103,8 +128,36 @@ class Table{
         return 0;
     }
 
-    updateTableDataset() {
-        this.theTableHtmlElement.bootstrapTable('load', this.tableRows);
+    calculateSollSum() {
+        let sum = 0;
+        for (let tempCount = 0; tempCount < this.tableRows.length; tempCount++) {
+            sum = sum + this.tableRows[tempCount].sollEntries;
+        }
+        return sum;
+    }
+
+    calculateHabenSum() {
+        let sum = 0;
+        for (let tempCount = 0; tempCount < this.tableRows.length; tempCount++) {
+            sum = sum + this.tableRows[tempCount].habenEntries;
+        }
+        return sum;
+    }
+
+    updateTableDataset(tableRows) {
+        this.theTableHtmlElement.bootstrapTable('load', tableRows);
+    }
+
+    hideRows() {
+        let lastSollRow = this.getLastNotEmptySollRow()-1;
+        let lastHabenRow = this.getLastNotEmptyHabenRow() - 1;
+        let minimizedTable = [{ sollName: this.tableRows[lastSollRow].sollName, sollEntries: this.tableRows[lastSollRow].sollEntries, habenName: this.tableRows[lastHabenRow].habenName, habenEntries: this.tableRows[lastHabenRow].habenEntries }];
+        
+        this.updateTableDataset(minimizedTable);
+    }
+
+    showRows() {
+        this.updateTableDataset(this.tableRows);
     }
 
 
