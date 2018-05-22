@@ -44,46 +44,7 @@ function alertInfo() {
 }
 
 
-function buchenButtonClicked() {
 
-    let sollName;
-    let habenName;
-    let sollSum;
-    let habenSum;
-    let splitSum;
-    let subEntries = [];
-    let inputRowCount = document.getElementsByClassName("inputRow").length;
-
-    let theEntry = new SplittableEntry($("#sollName" + 1).val().trim().toUpperCase(), parseInt($("#sollSum" + 1).val()), $("#habenName" + 1).val().trim().toUpperCase(), parseInt($("#habenSum" + 1).val()));
-
-    for (let inputFieldNumber = 2; inputFieldNumber <= inputRowCount; inputFieldNumber++) {
-        theEntry.split($("#sollName" + inputFieldNumber).val().trim().toUpperCase(), parseInt($("#sollSum" + inputFieldNumber).val()), $("#habenName" + inputFieldNumber).val().trim().toUpperCase(), ($("#habenSum" + inputFieldNumber).val()));
-    }
-    theEntry.post();
-    theEntry.postSubEntries();
-
-
-
-
-    //if (validateEntry(theEntry) == false) {
-
-    //   console.log("Fehler nach der Ausführung");
-
-    //}else{
-
-
-    
-    history.addEntryToHistory(theEntry);
-
-    ////Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
-    ////document.getElementById('sollName').value = '';
-    ////document.getElementById('sollSum').value = '';
-    ////document.getElementById('habenName').value = '';
-    ////document.getElementById('habenSum').value = '';
-
-    //}
-
-}
 
 function splitButtonClicked(){
 
