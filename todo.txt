@@ -1,1 +1,0 @@
-Onclicks durch eventlisteners ersetzten... für Neuer Passiv Account etc

@@ -16,6 +16,12 @@ body {
     height:90vh;
 }
 
+#errorDiv{
+    height: 20px;
+    color: red;
+    text-align:center;
+}
+
 #accountSpace {
     height: 90vh;
 }

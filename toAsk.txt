@@ -1,0 +1,9 @@
+Abschlussprüfungen: Wenn im Soll SBK und im Haben NICHT Warenbestand, dann buchen
+Wenn im Soll SBK und im Haben Warenbestand, dann buchen
+
+Was jetzt
+
+speichern, drucken,
+buchungsroutinen umriss für bessere Darstellung
+
+movieclips miteinander kommunizieren lassen

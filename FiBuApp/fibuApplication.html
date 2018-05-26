@@ -2,8 +2,9 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
     <title>Fibu App</title>
 
@@ -91,6 +92,9 @@
             </div>
             <!-- Userinput: Buchungsfenster -->
             <div id="userInput" class="draggable">
+                <div id="errorDiv">
+
+                </div>
                 <table>
                     <tr>
 
@@ -130,8 +134,8 @@
                                         <td><button type="button" class="btn btn-default">Protokoll</button></td>
                                     </tr>
                                     <tr style="height: 60px;">
-                                        <td><button type="button" class="btn btn-default" id="splitButton" onclick="buchenButtonClicked()">Buchen</button></td>
-                                        <td><button type="button" class="btn btn-default" onclick="splitButtonClicked()">Split</button></td>
+                                        <td><button type="button" class="btn btn-default" onclick="buchenButtonClicked()">Buchen</button></td>
+                                        <td><button type="button" class="btn btn-default" id="splitButton" onclick="splitButtonClicked()">Split</button></td>
                                         <td><button type="button" class="btn btn-default" onClick="journalButtonClicked()">Journal</button></td>
                                     </tr>
                                 </tbody>

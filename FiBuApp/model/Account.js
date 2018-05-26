@@ -37,20 +37,24 @@ class Account {
         document.getElementById("accountSpace").appendChild(this.theAccountHtmlData);
     }
 
-    //deleteAccount() {
-    //    //Lösche HTML Element
-    //    this.theDraggableObject.theDraggableHtmlElement.remove();
+    deleteAccount() {
 
-    //    //Lösche Account aus registeredAccounts Array
-    //    for (let tempCount = 0; tempCount < registeredAccounts.length; tempCount++) {
-    //        if (registeredAccounts[tempCount].accountName == this.accountName) {
-    //            registeredAccounts.splice(tempCount - 1, 1);
-    //        }
-    //    }
-    //}
+        if (this.theAccountId == "EBK" || this.theAccountId == "SBK" || this.theAccountId == "GUV") {
+            handleError("Löschung nicht möglich");
+        } else if (this.accountTable.tableRows[0] != null) {
+            handleError("Löschung nicht möglich");
+        } else {
+            //Lösche HTML Element
+            this.theDraggableObject.theDraggableHtmlElement.remove();
 
-
-
+            //Lösche Account aus registeredAccounts Array
+            for (let tempCount = 0; tempCount < registeredAccounts.length; tempCount++) {
+                if (registeredAccounts[tempCount].accountName == this.accountName) {
+                    registeredAccounts.splice(tempCount - 1, 1);
+                }
+            }
+        }
+    }
 }
 
 

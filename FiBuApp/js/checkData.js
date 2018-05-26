@@ -1,4 +1,4 @@
-function validateEntry(theEntry) {
+function validateEntry(anEntry) {
 
     //Eröffnungsbuchungen
     if (accountingStatus == 0) {
@@ -20,20 +20,22 @@ function generalEntryValidation(anEntry) {
 
     //Wenn die Summen nicht stimmen gib ne Fehlermeldung aus und schreibs ins Protokoll
     if (anEntry.sollSum != anEntry.habenSum) {
-        //Fehlermeldung: Summen stimmen nicht überein
+        handleError("Summen stimmen nicht überein");
         return false;
     }
 
     //Wenn Soll oder Haben 0 ist gib ne Fehlermeldung ...
     if (anEntry.sollSum == 0 || anEntry.habenSum == 0) {
+        handleError("Keine Nullbuchungen erlaubt");
         return false;
-        //Fehlermeldung: Keine Nullbuchungen erlaubt
+        
     }
 
     // Prüfen dass Soll und Habenkonto nicht dasselbe sind
     if (anEntry.sollName == anEntry.habenName) {
+        handleError("Soll- und Habenkonto können nicht dasselbe sein");
         return false;
-        //Fehlermeldung: Soll- und Habenkonto können nicht dasselbe sein
+        
     }
 
     return true;
@@ -41,192 +43,205 @@ function generalEntryValidation(anEntry) {
 
 function eroeffnungsBuchungenEntryValidation(anEntry) {
 
-    generalEntryValidation(anEntry);
+    if (!generalEntryValidation(anEntry)) {
+        return false;
+    }
 
     //Prüfen ob Konto bereits auf EBK gebucht hat
-    if (checkIfAccountHasBookedOnEBK(theEntry)) {
+    if (checkIfAccountHasBookedOnEBK(anEntry)) {
+        handleError("Konto hat bereits auf EBK gebucht");
         return false;
-        //Fehlermeldung: Konto hat bereits auf EBK gebucht
+        
     }
 
     //Prüfen ob Buchung auf oder von EBK kommt
     if (anEntry.sollName != "EBK" && anEntry.habenName != "EBK") {
+        handleError("Buchung ist keine Eröffnungsbuchung");
         return false;
-        //Fehlermeldung: Buchung ist keine Eröffnungsbuchung
+        
     }
 
     //Prüfen ob SBK oder GUV in Buchung enthalten ist
     if (checkForSbkOrGuv(anEntry)) {
+        handleError("Eröffnungsbuchung mit GUV oder SBK nicht möglich");
         return false;
-        //Fehlermeldung: Eröffnungsbuchung mit GUV oder SBK nicht möglich
+        
     }
 
     //Überprüfe ob nicht EBK Soll-Konto bereits existiert
     if (anEntry.sollName != "EBK") {
         if (checkIfAccountExists(anEntry.sollName)) {
+            handleError("Sollkonto bereits angelegt");
             return false;
-            //Fehlermeldung: Sollkonto bereits angelegt
+            
         }
     }
 
     //Überprüfe ob nicht EBK Soll-Konto bereits existiert
     if (anEntry.habenName != "EBK") {
         if (checkIfAccountExists(anEntry.habenName)) {
+            handleError("Sollkonto bereits angelegt");
             return false;
-            //Fehlermeldung: Sollkonto bereits angelegt
+            
         }
     }
-
+    clearError();
     return true;
 }
 
 function laufendeBuchungenEntryValidation(anEntry) {
 
-    generalEntryValidation(anEntry);
+    if (!generalEntryValidation(anEntry)) {
+        return false;
+    }
 
     //Überprüfe ob Buchung EBK enthält
     if (anEntry.sollName == "EBK" || anEntry.habenName == "EBK") {
-        //Fehlermeldung: Buchung nicht möglich, EBK bereits abgeschlossen
+        handleError("Buchung nicht möglich, EBK bereits abgeschlossen");
         return false;
     }
 
     //Überprüfe ob Sollkonto existiert
     if (!checkIfAccountExists(anEntry.sollName)) {
-        //Fehlermeldung: Sollkonto muss erst angelegt werden
+        handleError("Sollkonto muss erst angelegt werden");
         return false;
     }
 
     //Überprüfe ob Habenkonto existiert
     if (!checkIfAccountExists(anEntry.habenName)) {
-        //Fehlermeldung: Sollkonto muss erst angelegt werden
+        handleError("Habenkonto muss erst angelegt werden");
         return false;
     }
 
     //Überprüfe ob Auftrag an Ertrag oder andersrum buchen soll
     if ((checkIfAccountIsOfType(anEntry.sollName, "aufwand") && checkIfAccountIsOfType(anEntry.habenName, "ertrag")) || (checkIfAccountIsOfType(anEntry.sollName, "ertrag") && checkIfAccountIsOfType(anEntry.habenName, "aufwand"))) {
-        //Fehlermeldung: Buchung nicht möglich
+        handleError("Buchung nicht möglich");
         return false;
     }
 
     //Überprüfe ob Auftrag an Ertrag oder andersrum buchen soll
     if ((checkIfAccountIsOfType(anEntry.habenName, "aufwand") && checkIfAccountIsOfType(anEntry.sollName, "ertrag")) || (checkIfAccountIsOfType(anEntry.habenName, "ertrag") && checkIfAccountIsOfType(anEntry.sollName, "aufwand"))) {
-        //Fehlermeldung: Buchung nicht möglich
+        handleError("Buchung nicht möglich");
         return false;
     }
 
+    clearError();
     return true;
 }
 
 function abschlussBuchungenEntryValidation(anEntry) {
 
-    generalEntryValidation(anEntry);
+    if (!generalEntryValidation(anEntry)) {
+        return false;
+    }
 
     //Überprüfe ob GUV gegen EBK oder SBK gebucht wurde
     if (anEntry.sollName == "GUV" || anEntry.habenName == "GUV") {
         if ((anEntry.sollName == "SBK" || anEntry.sollName == "EBK") || (anEntry.habenName == "SBK" || anEntry.habenName == "EBK")) {
-            //Fehlermeldung: Buchung gegen SBK oder EBK nicht möglich
+            handleError("Buchung gegen SBK oder EBK nicht möglich");
             return false;
         } 
 
         //Überprüfe ob Sollkonto existiert
         if (!checkIfAccountExists(anEntry.sollName)) {
-            //Fehlermeldung: Sollkonto existiert nicht
+            handleError("Sollkonto existiert nicht");
             return false;
         }
 
         //Überprüfe ob Habenkonto existiert
         if (!checkIfAccountExists(anEntry.habenName)) {
-            //Fehlermeldung: Habenkonto existiert nicht
+            handleError("Habenkonto existiert nicht");
             return false;
         }
 
         //Überprüfe ob im Soll ein Aufwandskonto gebucht wurde
         if (checkIfAccountIsOfType(anEntry.sollName, "aufwand")) {
-            //Fehlermeldung: Aufwandskonto im Soll nicht möglich
+            handleError("Aufwandskonto im Soll nicht möglich");
             return false;
         }
 
         //Überprüfe ob im Haben ein Ertragskonto gebucht wurde
         if (checkIfAccountIsOfType(anEntry.habenName, "ertrag")) {
-            //Fehlermeldung: Ertragskonto im Haben nicht möglich
+            handleError("Ertragskonto im Haben nicht möglich");
             return false;
         }
 
     } else {
         //Wenn GUV weder in Soll noch Haben gebucht wurde:
 
-        //Überprüfe ob im Haben SBK und im Soll Warenbestand gebucht wurde
-        if (anEntry.habenName == "SBK" && anEntry.sollName == "Warenbestand") {
-            //Fehlermeldung: Abschluss Warenbestand im Soll nicht möglich
+        //Überprüfe ob im Haben SBK und im Soll WARENBESTAND gebucht wurde
+        if (anEntry.habenName == "SBK" && anEntry.sollName == "WARENBESTAND") {
+            handleError("Abschluss WARENBESTAND im Soll nicht möglich");
             return false;
         }
 
-        //Überprüfe ob im Soll SBK und im Haben Warenbestand gebucht wurde
-        if (anEntry.sollName == "SBK" && anEntry.habenName == "Warenbestand") {
+        //Überprüfe ob im Soll SBK und im Haben WARENBESTAND gebucht wurde
+        if (anEntry.sollName == "SBK" && anEntry.habenName == "WARENBESTAND") {
 
-            //Überprüfe ob Warenbestandskonto nicht angelegt wurde
-            if (!checkIfAccountExists("Warenbestand")) {
-                //Fehlermeldung: Warenbestandskonto existiert nicht
+            //Überprüfe ob WARENBESTANDskonto nicht angelegt wurde
+            if (!checkIfAccountExists("WARENBESTAND")) {
+                handleError("WARENBESTANDskonto existiert nicht");
                 return false;
             }
         }
 
-        //Überprüfe ob im Soll Warenaufwand und im Haben Warenbestand gebucht wurde
-        if (anEntry.sollName == "Warenaufwand" && anEntry.habenName == "Warenbestand") {
+        //Überprüfe ob im Soll WARENAUFWAND und im Haben WARENBESTAND gebucht wurde
+        if (anEntry.sollName == "WARENAUFWAND" && anEntry.habenName == "WARENBESTAND") {
 
             //Überprüfe ob Konten existieren
             if (!checkIfAccountExists(anEntry.sollName)) {
-                //Fehlermeldung: Sollkonto existiert nicht
+                handleError("Sollkonto existiert nicht");
                 return false;
             }
             if (!checkIfAccountExists(anEntry.habenName)) {
-                //Fehlermeldung: Habenkonto existiert nicht
+                handleError("Habenkonto existiert nicht");
                 return false;
             }
         }
 
-        //Überprüfe ob im Soll Warenbestand und im Haben Warenaufwand gebucht wurde
-        if (anEntry.sollName == "Warenbestand" && anEntry.habenName == "Warenaufwand") {
+        //Überprüfe ob im Soll WARENBESTAND und im Haben WARENAUFWAND gebucht wurde
+        if (anEntry.sollName == "WARENBESTAND" && anEntry.habenName == "WARENAUFWAND") {
 
             //Überprüfe ob Konten existieren
             if (!checkIfAccountExists(anEntry.sollName)) {
-                //Fehlermeldung: Sollkonto existiert nicht
+                handleError("Sollkonto existiert nicht");
                 return false;
             }
             if (!checkIfAccountExists(anEntry.habenName)) {
-                //Fehlermeldung: Habenkonto existiert nicht
+                handleError("Habenkonto existiert nicht");
                 return false;
             }
-        }
-
-        //Überprüfe ob im Soll SBK gebucht wurde
-        if (anEntry.sollName == "SBK") {
-
-            //Überprüfe ob Habenkonto nicht Warenbestand ist
-            if (anEntry.habenName == "Warenbestand") {
-                //Fehlermeldung: Warenbestand darf hier nicht im Haben gebucht werden
-                return false;
-            }
-
-            //Überprüfe ob Habenkonto existiert
-            if (!checkIfAccountExists(anEntry.habenName)) {
-                //Fehlermeldung: Habenkonto existiert nicht
-                return false;
-            }
-
         }
 
         //Überprüfe ob im Haben SBK gebucht wurde
         if (anEntry.habenName == "SBK") {
 
+            //Überprüfe ob Soll nicht WARENBESTAND ist
+            if (anEntry.sollName == "WARENBESTAND") {
+                handleError("WARENBESTAND darf hier nicht im Haben gebucht werden");
+                return false;
+            }
+
+            //Überprüfe ob Habenkonto existiert
+            if (!checkIfAccountExists(anEntry.habenName)) {
+                handleError("Habenkonto existiert nicht");
+                return false;
+            }
+
+        }
+
+        //Überprüfe ob im Soll SBK gebucht wurde
+        if (anEntry.sollName == "SBK") {
+
             //Überprüfe ob Sollkonto existiert
-            if (!checkIfAccountExists(anEntry.sollName)) {
-                //Fehlermeldung: Sollkonto existiert nicht
+            if (!checkIfAccountExists(anEntry.habenName)) {
+                handleError("Sollkonto existiert nicht");
                 return false;
             }
         }
     }
 
+    clearError();
     return true;
 }
 
@@ -251,21 +266,16 @@ function checkIfAccountIsOfType(accountId, accountType) {
 }
 
 //Bei Buchung prüfen ob das Konto bereits auf das EBK gebucht hat
-function checkIfAccountHasBookedOnEBK(theEntry){
-    for(i = 0; i <= history.historyEntries.length - 1; i++){
-        if (theEntry.sollName == history.historyEntries[i].sollName && theEntry.habenName == history.historyEntries[i].habenName) {
-            if (theEntry.sollName == "EBK" || theEntry.habenName == "EBK") {
-                alert("Dieses Konto hat bereits auf das EBK gebucht.");
-                return false;
-            }
-        } 
+function checkIfAccountHasBookedOnEBK(anEntry){
+     if (checkIfAccountExists(anEntry.sollName) && checkIfAccountExists(anEntry.habenName)) {
+        return true;
     }
-    return true;
+    return false;
 }
 
 //Überprüfe ob Buchung SBK oder GUV enthält
-function checkForSbkOrGuv(theEntry){
-    if (theEntry.sollName == "SBK" || anEntry.habenName == "SBK" || theEntry.sollName == "GUV" || theEntry.habenName == "GUV") {
+function checkForSbkOrGuv(anEntry){
+    if (anEntry.sollName == "SBK" || anEntry.habenName == "SBK" || anEntry.sollName == "GUV" || anEntry.habenName == "GUV") {
         return true;
     }
     return false;
@@ -280,43 +290,52 @@ function checkIfAccountExists(accountId){
     }
 }
 
-//function checkForEbk(theEntry){
+function handleError(anErrorString) {
+    console.log(anErrorString);
+    document.getElementById("errorDiv").innerHTML = anErrorString;
+}
+
+function clearError() {
+    document.getElementById("errorDiv").innerHTML = "";
+}
+
+//function checkForEbk(anEntry){
 //    //Nur Eröffnungsbuchungen dürfen in das EBK
 
-//    if(theEntry.sollName == "EBK"){
+//    if(anEntry.sollName == "EBK"){
 //        console.log("Nur Eröffnungsbuchungen dürfen in das EBK");
 //        return false;   
-//    }else if(theEntry.habenName == "EBK"){
+//    }else if(anEntry.habenName == "EBK"){
 //        console.log("Nur Eröffnungsbuchungen dürfen in das EBK");
 //        return false;
 //    }
 //}
 
 
-//function checkIfEntrySollsumAndHabensumAreEqual(theEntry){
+//function checkIfEntrySollsumAndHabensumAreEqual(anEntry){
 
 ////Eintrag ins Protokoll bei Fehler
-//    if(theEntry.sollSum != theEntry.habenSum){
+//    if(anEntry.sollSum != anEntry.habenSum){
 //        console.log("Beide Zahlen müssen übereinstimmen");
 //        return false;
 //    }
 
 //}
 
-//function checkNull(theEntry){
+//function checkNull(anEntry){
 
 //    //Eintrag ins Protokoll bei Fehler
-//    if(theEntry.sollSum == 0 || theEntry.habenSum == 0){
+//    if(anEntry.sollSum == 0 || anEntry.habenSum == 0){
 //        console.log("Keine Buchung darf Null sein")
 //        return false;
 //  }
 
 //}
 
-//function checkName(theEntry){
+//function checkName(anEntry){
 
 //    //Eintrag ins Protokoll bei Fehler
-//    if(theEntry.sollName == theEntry.habenName){
+//    if(anEntry.sollName == anEntry.habenName){
 //        console.log("Man kann nicht soll und haben auf das gleiche Konto buchen");
 //        return false;
 //    }
@@ -324,25 +343,25 @@ function checkIfAccountExists(accountId){
 //}
 
 //Überprüfe ob Buchung eine Eröffnungsbuchung ist
-//function checkIfEntryPostsToEBK(theEntry){
-//    if(theEntry.sollName != "EBK"){
-//        if(theEntry.habenName != "EBK"){
+//function checkIfEntryPostsToEBK(anEntry){
+//    if(anEntry.sollName != "EBK"){
+//        if(anEntry.habenName != "EBK"){
 //            console.log("Eingangsbuchungen müssen in das EBK");
 //            return false;
 //        }
 //    } 
 //}
 
-//function checkForIncExpAcc(theEntry){
+//function checkForIncExpAcc(anEntry){
 
 //    //Buchung darf nicht an Aufwands / Ertragskonto gehen
 //    for(i = 0;  i <= registeredAccounts.length; i++){
-//        if(theEntry.sollName == registeredAccounts[i].theAccountId){
+//        if(anEntry.sollName == registeredAccounts[i].theAccountId){
 //            if(registeredAccounts[i].accountType == "ertrag" || registeredAccounts[i].accountType == "aufwand"){
 //                console.log("Fehler. Konto darf kein Aufwands-/ Ertragskonto sein.")
 //                return false;
 //            }
-//        } else if (theEntry.habenName == registeredAccounts[i].theAccountId){
+//        } else if (anEntry.habenName == registeredAccounts[i].theAccountId){
 //            if(registeredAccounts[i].accountType == "ertrag" || registeredAccounts[i].accountType == "aufwand"){
 //                console.log("Fehler. Konto darf kein Aufwands-/ Ertragskonto sein.")
 //                return false;
@@ -353,31 +372,31 @@ function checkIfAccountExists(accountId){
 
 //}
 
-//function checkGuv(theEntry){
+//function checkGuv(anEntry){
 //    //Buchung gegen EBK / SBK nicht möglich bei Guv
-//    if(theEntry.sollName == "GUV"){
-//        if(theEntry.habenName == "EBK" || theEntry.habenName =="SBK"){
+//    if(anEntry.sollName == "GUV"){
+//        if(anEntry.habenName == "EBK" || anEntry.habenName =="SBK"){
 //            console.log("Buchungen in das GuV dürfen nicht in das EBK oder SBK");
 //            return false;
 //        }
 //    }
 
-//    if(theEntry.habenName == "GUV"){
-//        if(theEntry.sollName == "EBK" ||theEntry.habenName == "SBK"){
+//    if(anEntry.habenName == "GUV"){
+//        if(anEntry.sollName == "EBK" ||anEntry.habenName == "SBK"){
 //            console.log("Buchungen in das GuV dürfen nicht in das EBK oder SBK");
 //            return false;
 //        }
 //    }
 //}
 
-//function checkGuvAccounting(theEntry){
+//function checkGuvAccounting(anEntry){
 
 //    //Wenn im Soll GuV gebucht wurde
-//    if(theEntry.sollName == "GUV"){
+//    if(anEntry.sollName == "GUV"){
 
 //    //Prüfen ob im Haben ein Ertragskonto ist
 //    for(i = 0;  i <= registeredAccounts.length; i++){
-//        if(theEntry.sollName == registeredAccounts[i].theAccountId){
+//        if(anEntry.sollName == registeredAccounts[i].theAccountId){
 //            if(registeredAccounts[i].accountType == "ertrag"){
 //                console.log("Fehler. Konto darf kein Ertragskonto sein.")
 //                return false;
@@ -386,7 +405,7 @@ function checkIfAccountExists(accountId){
 //    }
 //    //Wenn Ja Fehlermeldung (Abschluss Ertragskonto im Haben nicht möglich)
 //    //Wenn Nein Prüfen ob es das Habenkonto gibt
-//    let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
+//    let habenAccount = registeredAccounts.find(account => account.theAccountId === anEntry.habenName);
 //        if(habenAccount == null){
 //            console.log("Fehler. Haben Konto muss existieren.")
 //            return false;
@@ -394,11 +413,11 @@ function checkIfAccountExists(accountId){
 //    }
 
 //    //Wenn im Haben GuV gebucht wurde
-//    if(theEntry.habenName == "GUV"){
+//    if(anEntry.habenName == "GUV"){
 
 //    //Prüfen ob im Soll ein Aufwandskonto ist
 //    for(i = 0;  i <= registeredAccounts.length; i++){
-//        if(theEntry.sollName == registeredAccounts[i].theAccountId){
+//        if(anEntry.sollName == registeredAccounts[i].theAccountId){
 //            if(registeredAccounts[i].accountType == "aufwand"){
 //                console.log("Fehler. Konto darf kein Ertragskonto sein.")
 //                return false;
@@ -407,7 +426,7 @@ function checkIfAccountExists(accountId){
 //    }
 //    //Wenn Ja Fehlermeldung(Abschluss Aufwandskonto im Soll nicht möglich)
 //    //Wenn Nein Prüfen ob es das Sollkonto gibts
-//    let sollAccount = registeredAccounts.find(account => account.theAccountId === theEntry.sollName);
+//    let sollAccount = registeredAccounts.find(account => account.theAccountId === anEntry.sollName);
 //        if(sollAccount == null){
 //            console.log("Fehler. Konto muss existieren.")
 //            return false;
@@ -415,20 +434,20 @@ function checkIfAccountExists(accountId){
 //    }
 //}
 
-//function checkSbkWare(theEntry){
-//    //Wenn Warenbestand an SBK gebucht wird Fehlermeldung
-//    if(theEntry.sollName == "WARENBESTAND" && theEntry.habenName == "SBK"){
-//        console.log("Warenbestand kann nicht an SBK gebucht werden.");
+//function checkSbkWare(anEntry){
+//    //Wenn WARENBESTAND an SBK gebucht wird Fehlermeldung
+//    if(anEntry.sollName == "WARENBESTAND" && anEntry.habenName == "SBK"){
+//        console.log("WARENBESTAND kann nicht an SBK gebucht werden.");
 //        return false;
 //    }
-//    //(Abschluss Warenbestand im Soll nicht möglich)
+//    //(Abschluss WARENBESTAND im Soll nicht möglich)
 
-//    if(theEntry.sollName == "SBK" && theEntry.habenName == "WARENBESTAND"){
-//        //Wenn SBK an Ware prüfen ob Warenbestandskonto angelegt wurde
+//    if(anEntry.sollName == "SBK" && anEntry.habenName == "WARENBESTAND"){
+//        //Wenn SBK an Ware prüfen ob WARENBESTANDskonto angelegt wurde
 //        //Wenn nicht Hinweis das es nicht angelegt ist
-//        let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
+//        let habenAccount = registeredAccounts.find(account => account.theAccountId === anEntry.habenName);
 //        if(habenAccount == null){
-//            console.log("Warenbestandskonto muss angelegt werden");
+//            console.log("WARENBESTANDskonto muss angelegt werden");
 //            return false;
 //        }
         
@@ -436,12 +455,12 @@ function checkIfAccountExists(accountId){
     
 //}
 
-//function checkAufwandBestand(theEntry){
+//function checkAufwandBestand(anEntry){
 //    //Prüfen ob die Konten Aufwands oder Bestandskonten 
-//    if(theEntry.sollName == "WARENAUFWAND" && theEntry.habenName == "WARENBESTAND" || theEntry.habenName == "WARENAUFWAND" && theEntry.sollName == "WARENAUFWAND"){
+//    if(anEntry.sollName == "WARENAUFWAND" && anEntry.habenName == "WARENBESTAND" || anEntry.habenName == "WARENAUFWAND" && anEntry.sollName == "WARENAUFWAND"){
         
-//        let sollAccount = registeredAccounts.find(account => account.theAccountId === theEntry.sollName);
-//        let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
+//        let sollAccount = registeredAccounts.find(account => account.theAccountId === anEntry.sollName);
+//        let habenAccount = registeredAccounts.find(account => account.theAccountId === anEntry.habenName);
 
 //        if(sollAccount == null ||habenAccount == null){
 //            console.log("Fehler in einem der beiden Konten.");
@@ -452,20 +471,20 @@ function checkIfAccountExists(accountId){
 //    //Wenn nicht Hinweis (Fehlendes Konto)
 //}
 
-//function checkSbk(theEntry){
+//function checkSbk(anEntry){
 //    //Wenn SBK im Soll gebucht wurde
-//    if(theEntry.sollName == "SBK"){
-//        //Prüfen ob das Habenkonto existiert und nicht Warenbestand ist
-//        let habenAccount = registeredAccounts.find(account => account.theAccountId === theEntry.habenName);
+//    if(anEntry.sollName == "SBK"){
+//        //Prüfen ob das Habenkonto existiert und nicht WARENBESTAND ist
+//        let habenAccount = registeredAccounts.find(account => account.theAccountId === anEntry.habenName);
 //        if(habenAccount == null){
 //            console.log("Fehler beim Habenkonto.");
 //            return false;
 //        }
 
-//    }else if(theEntry.habenName == "SBK"){
+//    }else if(anEntry.habenName == "SBK"){
 //        //Wenn SBK im Haben gebucht wurde
 //        //Prüfen ob das Sollkonto existiert
-//        let sollAccount = registeredAccounts.find(account => account.theAccountId === theEntry.sollName);
+//        let sollAccount = registeredAccounts.find(account => account.theAccountId === anEntry.sollName);
 //        if(sollAccount == null){
 //            console.log("Fehler im Sollkonto.");
 //            return false;

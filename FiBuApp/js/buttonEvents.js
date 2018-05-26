@@ -15,9 +15,12 @@ function buchenButtonClicked() {
     }
 
 
+    if (validateEntry(theEntry)) {
+        theEntry.post();
+        history.addEntryToHistory(theEntry);
+    }
 
-    theEntry.post();
-    theEntry.postSubEntries();
+    //theEntry.postSubEntries();
 
 
 
@@ -30,7 +33,7 @@ function buchenButtonClicked() {
 
 
 
-    history.addEntryToHistory(theEntry);
+    
 
     ////Werte werden aus dem Inputfeld gelöscht sobald buchenButton geklickt wurde
     ////document.getElementById('sollName').value = '';
@@ -53,40 +56,40 @@ function newButtonClicked() {
 }
 
 function newAktivAccountButtonClicked() {
-    let newAccountName = document.getElementById("newAktivAccountName").value;
+    let newAccountName = document.getElementById("newAktivAccountName").value.toUpperCase();
     if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
         new Account(newAccountName, "aktiv");
     }
 }
 
 function newPassivAccountButtonClicked() {
-    let newAccountName = document.getElementById("newPassivAccountName").value;
+    let newAccountName = document.getElementById("newPassivAccountName").value.toUpperCase();
     if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
         new Account(newAccountName, "passiv");
     }
 }
 
 function newAufwandAccountButtonClicked() {
-    let newAccountName = document.getElementById("newAufwandAccountName").value;
+    let newAccountName = document.getElementById("newAufwandAccountName").value.toUpperCase();
     if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
         new Account(newAccountName, "aufwand");
     }
 }
 
 function newErtragAccountButtonClicked() {
-    let newAccountName = document.getElementById("newErtragAccountName").value;
+    let newAccountName = document.getElementById("newErtragAccountName").value.toUpperCase();
     if (registeredAccounts.find(account => account.theAccountId === newAccountName) == null) {
         new Account(newAccountName, "ertrag");
     }
 }
 
 function deleteAccountButtonClicked() {
-    let newAccountName = document.getElementById("deleteAccountName").value;
+    let newAccountName = document.getElementById("deleteAccountName").value.toUpperCase();
     let accountToDelete = registeredAccounts.find(account => account.theAccountId === newAccountName);
     if (accountToDelete != null) {
         accountToDelete.deleteAccount();
     } else {
-        document.getElementById("deleteAccountName").value = "Account existiert nicht";
+        handleError("Löschen nicht möglich, Account existiert nicht");
     }
 }
 
@@ -94,22 +97,28 @@ function closingButtonClicked() {
 
     if (accountingStatus == 0) {
         if (validateEBKSumForClosing()) {
-            closeEBK();
+            //closeEBK();
+            
+            //Splitbuchungen deaktivieren
+            document.getElementById("splitButton").disabled = true;
+            accountingStatus = 1;
+            console.log(accountingStatus);
         } else {
             alert("Summen des EBK's stimmen nicht überein!");
         }
-    }
-
-    if (accountingStatus == 1) {
+    } else if (accountingStatus == 1){
         //Anzeige: Wurden alle notwendigen Buchungen durchgeführt?
 
         new Account("SBK", "SBK");
         new Account("GUV", "GUV");
 
-        //Splitbuchungen deaktivieren
-        document.getElementById("splitButton").disabled = true;
-
+        
+        
+        accountingStatus = 2;
+        console.log(accountingStatus);
     }
+
+
     //checkBoxArray = ["Abschluss", "Steuerkonten", "Privatkonten", "Zeitl. Abgrenzung", "EWB/PWB"];
 
     //if (closingButtonFlag == 0) {
